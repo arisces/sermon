@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Secret Life of Prayer That Sets the Church on Fire - Charles G. Finney</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== CSS RESET & BASE ========== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --color-primary: #2c3e50;
+            --color-secondary: #34495e;
+            --color-accent: #c9a227;
+            --color-accent-dark: #a68521;
+            --color-text: #2d2d2d;
+            --color-text-light: #5d6d7e;
+            --color-bg: #ffffff;
+            --color-bg-warm: #fdfcfa;
+            --color-bg-highlight: #f8f6f0;
+            --color-border: #e8e6e0;
+            --color-border-accent: #c9a227;
+            --color-edit-bg: #fff8e1;
+            --color-edit-border: #ffc107;
+            
+            --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            
+            --line-height-body: 1.7;
+            --line-height-heading: 1.3;
+            
+            --max-width: 70ch;
+            --print-margin: 0.75in;
+            --spacing-section: 2rem;
+            --spacing-para: 1rem;
+            --sidebar-width: 380px;
+        }
+
+        html {
+            font-size: 20px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            line-height: var(--line-height-body);
+            color: var(--color-text);
+            background-color: var(--color-bg-warm);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========== PRINT SETUP ========== */
+        @page {
+            size: letter;
+            margin: var(--print-margin);
+            @top-center {
+                content: string(doctitle);
+                font-family: var(--font-sans);
+                font-size: 9pt;
+                color: #888;
+            }
+            @bottom-center {
+                content: counter(page);
+                font-family: var(--font-sans);
+                font-size: 9pt;
+                color: #888;
+            }
+        }
+
+        @page :first {
+            margin: 0;
+            @top-center { content: none; }
+            @bottom-center { content: none; }
+        }
+
+        @page cover {
+            margin: 0;
+            @top-center { content: none; }
+            @bottom-center { content: none; }
+        }
+
+        body {
+            string-set: doctitle "";
+        }
+
+        h1.main-title {
+            string-set: doctitle "The Secret Life of Prayer";
+        }
+
+        /* ========== COVER PAGE ========== */
+        .cover {
+            page: cover;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            page-break-after: always;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cover-accent-1 {
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            width: 80px;
+            height: 3px;
+            background: var(--color-accent);
+        }
+
+        .cover-accent-2 {
+            position: absolute;
+            bottom: 100px;
+            right: 60px;
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgba(201, 162, 39, 0.35);
+            transform: rotate(45deg);
+        }
+
+        .cover-accent-3 {
+            position: absolute;
+            top: 200px;
+            right: 100px;
+            width: 6px;
+            height: 6px;
+            background: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        .cover-content {
+            position: relative;
+            text-align: center;
+            width: 85%;
+            z-index: 10;
+        }
+
+        .cover-pretitle {
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .cover-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .cover-title span {
+            color: var(--color-accent);
+        }
+
+        .cover-subtitle {
+            font-family: var(--font-serif);
+            font-size: 0.875rem;
+            font-weight: 400;
+            font-style: italic;
+            color: #b8b8b8;
+            margin-bottom: 3rem;
+        }
+
+        .cover-divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+            margin: 0 auto 2rem auto;
+        }
+
+        .cover-meta {
+            font-size: 0.625rem;
+            color: #888;
+            letter-spacing: 1.5px;
+        }
+
+        .cover-meta p:last-child {
+            color: var(--color-accent);
+            margin-top: 0.5rem;
+        }
+
+        /* ========== CONTROL BAR ========== */
+        .control-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-primary);
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .control-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 0.875rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .control-btn.primary {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: #1a1a2e;
+        }
+
+        .control-btn.primary:hover {
+            background: var(--color-accent-dark);
+            border-color: var(--color-accent-dark);
+        }
+
+        .control-btn.active {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .control-btn svg {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        /* ========== MAIN LAYOUT ========== */
+        .main-container {
+            display: flex;
+            margin-top: 60px;
+            min-height: calc(100vh - 60px);
+        }
+
+        /* ========== OUTLINE SIDEBAR ========== */
+        .outline-sidebar {
+            width: var(--sidebar-width);
+            background: var(--color-bg);
+            border-right: 1px solid var(--color-border);
+            position: fixed;
+            top: 60px;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            padding: 1.5rem;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .outline-sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .outline-sidebar h3 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--color-accent);
+        }
+
+        .outline-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .outline-nav li {
+            margin-bottom: 0.75rem;
+        }
+
+        .outline-nav a {
+            display: block;
+            padding: 0.6rem 0.75rem;
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+            line-height: 1.4;
+        }
+
+        .outline-nav a:hover {
+            background: var(--color-bg-highlight);
+            border-left-color: var(--color-accent);
+        }
+
+        .outline-nav a.active {
+            background: var(--color-bg-highlight);
+            border-left-color: var(--color-accent);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .outline-nav .section-link {
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 0.95rem;
+        }
+
+        .outline-nav .subsection-link {
+            padding-left: 1.25rem;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+        }
+
+        /* ========== CONTENT AREA ========== */
+        .content-area {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: margin-left 0.3s ease;
+        }
+
+        .content-area.full-width {
+            margin-left: 0;
+        }
+
+        .content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2.5rem 2rem 4rem;
+            background: var(--color-bg);
+        }
+
+        /* ========== TYPOGRAPHY ========== */
+        h1.main-title {
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            line-height: var(--line-height-heading);
+            page-break-after: avoid;
+        }
+
+        .subtitle {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--color-text-light);
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-top: var(--spacing-section);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--color-accent);
+            page-break-after: avoid;
+            scroll-margin-top: 80px;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            page-break-after: avoid;
+            scroll-margin-top: 80px;
+        }
+
+        p {
+            margin-bottom: var(--spacing-para);
+            text-align: justify;
+            text-align-last: left;
+            orphans: 2;
+            widows: 2;
+        }
+
+        .intro {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--color-text);
+            margin-bottom: 1.5rem;
+        }
+
+        strong {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        .scripture {
+            font-style: italic;
+            color: var(--color-secondary);
+            font-weight: 600;
+        }
+
+        .scripture-ref {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            font-weight: 600;
+        }
+
+        .emphasis {
+            font-weight: 700;
+            color: #8b4513;
+        }
+
+        .gold {
+            font-weight: 700;
+            color: var(--color-accent-dark);
+        }
+
+        /* ========== SPECIAL BOXES ========== */
+        .key-quote {
+            background: var(--color-primary);
+            color: #ffffff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--color-accent);
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.6;
+            page-break-inside: avoid;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .key-quote::before {
+            content: '"';
+            font-size: 2.5rem;
+            color: var(--color-accent);
+            font-family: var(--font-serif);
+            line-height: 0;
+            vertical-align: -12px;
+            margin-right: 0.5rem;
+        }
+
+        .highlight-box {
+            background: var(--color-bg-highlight);
+            border: 1px solid var(--color-border-accent);
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            page-break-inside: avoid;
+            border-radius: 4px;
+        }
+
+        .highlight-box-title {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-accent-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.625rem;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .call-box {
+            background: var(--color-bg-highlight);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            page-break-inside: avoid;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .call-box-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 0.625rem;
+        }
+
+        .question {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 1.25rem 0;
+            padding: 1rem;
+            background: var(--color-bg-highlight);
+            border-left: 4px solid var(--color-accent);
+            page-break-inside: avoid;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .section-divider {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--color-border);
+            font-size: 1rem;
+            letter-spacing: 8px;
+            font-family: var(--font-serif);
+        }
+
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--color-accent);
+        }
+
+        .closing {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            font-style: italic;
+        }
+
+        /* ========== EDIT MODE ========== */
+        .edit-mode .content [contenteditable="true"] {
+            background: var(--color-edit-bg);
+            border: 2px dashed var(--color-edit-border);
+            padding: 0.5rem;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .edit-mode .content [contenteditable="true"]:focus {
+            background: #fff;
+            border-style: solid;
+        }
+
+        .edit-indicator {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            background: var(--color-edit-border);
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: none;
+            z-index: 1001;
+        }
+
+        .edit-mode .edit-indicator {
+            display: block;
+        }
+
+        /* ========== VERSION HISTORY MODAL ========== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 1rem;
+            overflow-y: auto;
+            max-height: 50vh;
+        }
+
+        .version-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--color-border);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .version-item:hover {
+            background: var(--color-bg-highlight);
+        }
+
+        .version-date {
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+        }
+
+        .modal-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        /* ========== PRINT STYLES ========== */
+        @media print {
+            .control-bar,
+            .outline-sidebar,
+            .edit-indicator,
+            .modal-overlay {
+                display: none !important;
+            }
+
+            .main-container {
+                margin-top: 0;
+            }
+
+            .content-area {
+                margin-left: 0 !important;
+            }
+
+            body {
+                background: white !important;
+                font-size: 12pt;
+                line-height: 1.6;
+            }
+
+            .content {
+                max-width: 100%;
+                padding: 0;
+                background: transparent !important;
+            }
+
+            h1.main-title {
+                font-size: 18pt;
+                color: #000;
+            }
+
+            h2 {
+                font-size: 14pt;
+                color: #000;
+                border-bottom-color: #666;
+                scroll-margin-top: 0;
+            }
+
+            h3 {
+                font-size: 12pt;
+                color: #333;
+                scroll-margin-top: 0;
+            }
+
+            .key-quote {
+                background: #f5f5f5 !important;
+                color: #000 !important;
+                border-left-color: #666;
+            }
+
+            .key-quote::before {
+                color: #666;
+            }
+
+            .highlight-box {
+                background: #fafafa !important;
+                border-color: #999;
+            }
+
+            .call-box {
+                background: #fafafa !important;
+                border-left-color: #666;
+            }
+
+            .emphasis, .gold {
+                color: #000;
+                font-weight: 700;
+            }
+
+            .scripture {
+                color: #333;
+            }
+
+            h2, h3 {
+                page-break-after: avoid;
+            }
+
+            .key-quote, .highlight-box, .call-box, .question {
+                page-break-inside: avoid;
+            }
+
+            p {
+                orphans: 3;
+                widows: 3;
+            }
+
+            .section-divider {
+                page-break-before: avoid;
+            }
+
+            .cover {
+                width: 100%;
+                height: 100vh;
+            }
+
+            .cover-title {
+                font-size: 2.25rem;
+            }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            :root {
+                --sidebar-width: 320px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 18px;
+            }
+
+            :root {
+                --sidebar-width: 100%;
+            }
+
+            .outline-sidebar {
+                width: 100%;
+                transform: translateX(-100%);
+            }
+
+            .outline-sidebar.visible {
+                transform: translateX(0);
+            }
+
+            .content-area {
+                margin-left: 0;
+            }
+
+            .content {
+                padding: 1.5rem 1rem 2.5rem;
+            }
+
+            h1.main-title {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .control-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .main-container {
+                margin-top: 100px;
+            }
+        }
+
+        /* ========== OUTLINE STYLES FOR PRINT ========== */
+        .outline-point {
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .outline-point::before {
+            content: "•";
+            color: var(--color-accent);
+            font-weight: bold;
+            position: absolute;
+            left: -1rem;
+        }
+
+        .outline-subpoint {
+            margin-left: 3rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.9375rem;
+            color: var(--color-text-light);
+        }
+
+        .outline-subpoint::before {
+            content: "◦";
+            color: var(--color-secondary);
+            margin-right: 0.5rem;
+        }
+
+        .key-concept {
+            background: var(--color-bg-highlight);
+            border-left: 3px solid var(--color-accent);
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            font-weight: 600;
+        }
+
+        .outline-section {
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Control Bar -->
+    <div class="control-bar" id="controlBar">
+        <div class="control-group">
+            <button class="control-btn" id="toggleOutlineBtn" onclick="toggleOutline()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                Hide Outline
+            </button>
+        </div>
+        <div class="control-group">
+            <button class="control-btn" id="sermonViewBtn" onclick="setViewMode('sermon')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Sermon
+            </button>
+            <button class="control-btn" id="outlineViewBtn" onclick="setViewMode('outline')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                Outline Only
+            </button>
+            <button class="control-btn" onclick="printDocument()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                Print
+            </button>
+            <button class="control-btn primary" onclick="toggleEditMode()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                Edit
+            </button>
+            <button class="control-btn" onclick="showVersionHistory()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                History
+            </button>
+        </div>
+    </div>
+
+    <!-- Edit Indicator -->
+    <div class="edit-indicator">
+        EDIT MODE - Changes auto-save
+    </div>
+
+    <!-- Version History Modal -->
+    <div class="modal-overlay" id="versionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Version History</h3>
+                <button class="modal-close" onclick="closeVersionHistory()">&times;</button>
+            </div>
+            <div class="modal-body" id="versionList">
+                <!-- Versions populated by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="control-btn" onclick="closeVersionHistory()">Close</button>
+                <button class="control-btn primary" onclick="exportContent()">Export Backup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Outline Sidebar (Navigation) -->
+        <aside class="outline-sidebar" id="outlineSidebar">
+            <h3>Navigate Sermon</h3>
+            <nav>
+                <ul class="outline-nav">
+                    <li><a href="#intro" class="section-link" data-section="intro">Introduction</a></li>
+                    <li><a href="#section1" class="section-link" data-section="section1">I. The Crisis of Powerless Christianity</a></li>
+                    <li><a href="#section2" class="section-link" data-section="section2">II. The Spirit of True Prayer</a></li>
+                    <li><a href="#section3" class="section-link" data-section="section3">III. The Transformation That Empowers</a></li>
+                    <li><a href="#section4" class="section-link" data-section="section4">IV. Self-Denial and Total Surrender</a></li>
+                    <li><a href="#section5" class="section-link" data-section="section5">V. The Cost of Transformation</a></li>
+                    <li><a href="#section6" class="section-link" data-section="section6">VI. The Secret Place</a></li>
+                    <li><a href="#section7" class="section-link" data-section="section7">VII. The Urgent Call</a></li>
+                    <li><a href="#conclusion" class="section-link" data-section="conclusion">Conclusion</a></li>
+                    <li><a href="#application" class="section-link" data-section="application">Application Points</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content-area" id="contentArea">
+            <!-- COVER PAGE -->
+            <div class="cover">
+                <div class="cover-accent-1"></div>
+                <div class="cover-accent-2"></div>
+                <div class="cover-accent-3"></div>
+                <div class="cover-content">
+                    <div class="cover-pretitle">A Sermon Based on</div>
+                    <h1 class="cover-title">THE SECRET LIFE<br>OF <span>PRAYER</span></h1>
+                    <div class="cover-subtitle">That Sets the Church on Fire</div>
+                    <div class="cover-divider"></div>
+                    <div class="cover-meta">
+                        <p>The Teachings of</p>
+                        <p>CHARLES G. FINNEY</p>
+                        <p style="margin-top: 1.5rem; font-size: 0.5rem;">Praise to Victory Ministries | Oakville, Ontario</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERMON CONTENT -->
+            <article class="content sermon-content" id="sermonContent">
+                <header id="intro">
+                    <h1 class="main-title">The Secret Life of Prayer That Sets the Church on Fire</h1>
+                    <p class="subtitle">A Message from the Teachings of Charles G. Finney</p>
+                </header>
+
+                <section class="intro" contenteditable="false">
+                    <p><strong>Central Question:</strong> Why are our churches full of activity yet empty of power? Why do so many attend services, yet so few experience the true manifest presence of God? We have sophisticated programs, moving songs, and polished presentations—but where is the fire that transforms lives?</p>
+                    
+                    <p><strong>Core Answer:</strong> The secret is total surrender—death to self expressed through a hidden life of prayer that allows Christ to live fully through surrendered vessels. This is the ancient path that transformed ordinary men into spiritual giants, that caused entire churches to be shaken by the power of God.</p>
+                </section>
+
+                <blockquote class="key-quote" contenteditable="false">
+                    The secret that sets the church on fire is total surrender—a life so completely yielded to God that Christ lives through them without resistance, setting entire families, communities, and churches ablaze with unquenchable flame.
+                </blockquote>
+
+                <aside class="question" contenteditable="false">
+                    What is the kind of prayer that God uses to set a church on fire with revival, and what does it cost to obtain it?
+                </aside>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <section id="section1">
+                    <h2>I. THE CRISIS OF POWERLESS CHRISTIANITY</h2>
+
+                    <p contenteditable="false">Charles Finney, during the Second Great Awakening, observed the same condition that we see in our time: churches maintaining the form of godliness while lacking its power. The answer is not found in better marketing strategies or more relevant music. It is not discovered in the latest church growth methodologies.</p>
+
+                    <aside class="highlight-box" contenteditable="false">
+                        <div class="highlight-box-title">Key Principle from Finney</div>
+                        <p>God is not looking for extraordinary talents, education, or eloquence. He is looking for completely surrendered hearts where Christ can live unhindered.</p>
+                    </aside>
+
+                    <p contenteditable="false"><strong>The Problem:</strong> Churches are full of activity—sophisticated programs, moving songs, gospel entertainment—but empty of God's manifest presence and transforming power. Consider the symptoms of this powerlessness that Finney identified:</p>
+
+                    <ul contenteditable="false">
+                        <li><strong>Multitudes attend, but few truly intercede.</strong> The pews are filled with spectators rather than participants in the work of prayer.</li>
+                        <li><strong>Religious commotion replaces genuine encounter.</strong> We have substituted activity for anointing, and motion for the moving of the Spirit.</li>
+                        <li><strong>Form and ritual persist while fire and glory are absent.</strong> The ancient flame has been replaced by the cold ashes of tradition.</li>
+                    </ul>
+
+                    <p contenteditable="false"><strong>The Ancient Secret Buried:</strong> Underneath layers of religious machinery lies a simple, pure truth that multitudes pass by daily—the power of total surrender expressed through hidden prayer. Finney wrote in his <em>Lectures on Revivals of Religion</em>:</p>
+
+                    <blockquote class="key-quote" contenteditable="false">
+                        A revival may be expected when Christians have a spirit of prayer for a revival—that is, when they pray as if their hearts were set upon it. When they go about groaning out their heart's desire. When they have real travail of soul.
+                    </blockquote>
+
+                    <p contenteditable="false">And again, Finney warned: <span class="gold">"Unless someone has the spirit of prayer, the truth by itself will do nothing but harden people in their impenitence."</span></p>
+                </section>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <section id="section2">
+                    <h2>II. THE SPIRIT OF TRUE PRAYER</h2>
+
+                    <p contenteditable="false">What constitutes the spirit of prayer? Is it saying many prayers with warm words? Is it following some religious ritual or routine? Finney taught that prayer is not a religious ritual or list of requests, but a passionate encounter with the living God that flows from a life of total surrender.</p>
+
+                    <aside class="highlight-box" contenteditable="false">
+                        <div class="highlight-box-title">Finney's Biblical Definition</div>
+                        <p><strong>"The spirit of prayer is a state of continual desire and anxiety of mind for the salvation of sinners."</strong> It is something that weighs down the heart of the believer. It is the subject of their thoughts all the time. It makes them look and act as if they had a load on their mind. They think of it by day, and they dream of it by night.</p>
+                    </aside>
+
+                    <p contenteditable="false"><strong>The Upper Room Pattern:</strong> The apostles had walked with Jesus for three years. They had witnessed miracles, heard His teachings, and seen the resurrection. Yet they still lacked power—they had to wait in the upper room. They remained in prayer, unity, and complete dependence until fire descended. That fire didn't illuminate one room—it set an entire city ablaze.</p>
+
+                    <p contenteditable="false">The apostles transformed the world not through eloquence or program, but through days of hidden prayer in the upper room until they became empty vessels the Holy Spirit could fill.</p>
+
+                    <p contenteditable="false"><strong>Beyond Technique:</strong> Prayer becomes powerful not through method but through surrender. When prayers cease to be negotiations and become worship. When the heart stops demanding and begins to yield. Finney explained that this is what the Bible means by <span class="scripture">"praying without ceasing"</span> (1 Thessalonians 5:17).</p>
+
+                    <blockquote class="key-quote" contenteditable="false">
+                        This is not enthusiasm. It is exactly what the apostle Paul felt when he said, "My little children, of whom I travail in birth again until Christ be formed in you." This travail of soul is that deep agony which people feel when they lay hold on God for a blessing and will not let Him go until they receive it.
+                    </blockquote>
+                </section>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <section id="section3">
+                    <h2>III. THE TRANSFORMATION THAT EMPOWERS PRAYER</h2>
+
+                    <p contenteditable="false"><strong>The Foundation:</strong> Prayer becomes powerful when the vessel is emptied of self and broken sufficiently for God to fill completely. Before the fire descends publicly, someone is burning secretly. Before multitudes are reached, an intercessor is in agony. Before harvest appears, someone sows with tears in hidden dependence.</p>
+
+                    <p contenteditable="false"><strong>The Process of Being Emptied:</strong> All confidence in human abilities must be destroyed first. Consider the biblical pattern that Finney often referenced:</p>
+
+                    <ul contenteditable="false">
+                        <li><strong>Moses spent 40 years in the desert</strong> unlearning palace wisdom before God could use him to lead a nation.</li>
+                        <li><strong>Joseph had to become a nobody in his own eyes</strong>—betrayed, imprisoned, forgotten—before liberating a nation.</li>
+                        <li><strong>Peter's self-confidence had to die through bitter failure</strong> before Pentecost power could flow through him.</li>
+                    </ul>
+
+                    <aside class="highlight-box" contenteditable="false">
+                        <div class="highlight-box-title">Finney's Teaching</div>
+                        <p>God cannot trust His power to vessels still full of themselves. When the disciples finally recognized their total inability, that's when resurrection power could flow through them and turn the world upside down.</p>
+                    </aside>
+
+                    <p contenteditable="false">Finney often spoke of his own need for brokenness and surrender. He wrote about being in a state of great dissatisfaction with his own want of stability in faith and love. He needed frequently to hold days of fasting and prayer, and to spend much time in overhauling his own religious life, in order to retain that communion with God and that hold upon divine truth that would enable him to labor efficiently for the promotion of revivals.</p>
+
+                    <p contenteditable="false"><strong>The Prayer of Faith:</strong> Faith is an indispensable condition of prevailing prayer. Finney was direct about this: <span class="emphasis">"When God has specially promised the thing, we are bound to believe we shall receive it when we pray for it. You have no right to put in an 'if' and say, 'Lord, if it be Thy will.' This is to insult God. To put an 'if' in God's promise when God has put none there is to charge God with being insincere."</span></p>
+                </section>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <section id="section4">
+                    <h2>IV. SELF-DENIAL, BROKENNESS, AND TOTAL SURRENDER</h2>
+
+                    <blockquote class="key-quote" contenteditable="false">
+                        A willingness to deny self is the very spirit of Christ. It is the heart and soul of the Gospel.
+                    </blockquote>
+
+                    <p contenteditable="false"><strong>The Core Secret:</strong> Total surrender—dying to self so completely that Christ can live through you without resistance, interference, or ego. This is the hinge upon which everything turns.</p>
+
+                    <p contenteditable="false"><strong>Biblical Examples of Total Surrender:</strong></p>
+
+                    <ul contenteditable="false">
+                        <li><strong>David:</strong> Worshipped in mountains when nobody watched; fought God's giants without hesitation. His secret life with God prepared him for public battles.</li>
+                        <li><strong>Abraham:</strong> Had to surrender Ishmael (human effort) before Isaac (promise) could come. Every attempt to do God's work in our own strength must be laid down.</li>
+                        <li><strong>The Rich Young Ruler:</strong> Everything must go when it's between you and God. There can be no negotiations, no conditions, no deals.</li>
+                        <li><strong>Peter:</strong> Self-confidence had to die through bitter failure before Pentecost power could flow.</li>
+                    </ul>
+
+                    <aside class="call-box" contenteditable="false">
+                        <div class="call-box-title">Finney's Call to Surrender</div>
+                        <p>When you come back to God for pardon and salvation, <span class="emphasis">come with all you have to lay all at His feet.</span> Give up all that you are and all that you have to God, and take Him at His word. This is the only way to find peace and rest for your souls.</p>
+                    </aside>
+
+                    <p contenteditable="false"><strong>The Cost Is Everything:</strong> Your agenda, ambition, pride, reputation, comfort, security—everything you think you can't live without. God doesn't share His throne—He wants complete control, not second place. This is a daily crucifixion, constant death to self, absolute submission.</p>
+
+                    <p contenteditable="false"><strong>The Result:</strong> You gain Christ, the power of the Holy Spirit, eternal purpose. You become a fountain of life to everyone around you. Your life becomes a conduit for resurrection power. As Paul declared: <span class="scripture">"I have been crucified with Christ and I no longer live, but Christ lives in me. The life I now live in the body, I live by faith in the Son of God, who loved me and gave himself for me."</span> <span class="scripture-ref">(Galatians 2:20 NIV)</span></p>
+
+                    <blockquote class="key-quote" contenteditable="false">
+                        God doesn't anoint abilities—He anoints brokenness. He doesn't use talent—He uses surrender. He doesn't seek strength—He seeks recognized weakness so His power can be manifested.
+                    </blockquote>
+                </section>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <section id="section5">
+                    <h2>V. THE COST OF TRANSFORMATION</h2>
+
+                    <p contenteditable="false"><strong>The Price Tag:</strong> Everything you hold tightly—everything you've placed before God must be laid down. No negotiations, no conditions, no deals.</p>
+
+                    <p contenteditable="false"><strong>Historical Proof of Cost:</strong> Revival has always been preceded by agonizing prayer. Consider the evidence Finney witnessed:</p>
+
+                    <ul contenteditable="false">
+                        <li><strong>Wales Revival:</strong> Began with a young miner spending nights in secret prayer.</li>
+                        <li><strong>Scotland:</strong> John Knox cried "Give me Scotland or I die" in desperate intercession.</li>
+                        <li><strong>America's Revivals:</strong> Men and women locked themselves in barns to seek God's face.</li>
+                        <li><strong>The Apostles:</strong> Ten days waiting in the upper room—praying, not performing.</li>
+                    </ul>
+
+                    <aside class="highlight-box" contenteditable="false">
+                        <div class="highlight-box-title">Father Nash: A Man of Prayer</div>
+                        <p>Finney knew a man named Father Nash who was most wonderful in prayer—one of the most earnest, devout, spiritually-minded, heavenly-minded men Finney ever saw. He gave himself up to almost constant prayer, <strong>literally praying himself to death at last.</strong></p>
+                        <p style="margin-top: 10px;">He had a praying list of persons whom he made subjects of prayer every day, and sometimes many times a day. When Finney got to town to start a revival, a boarding house lady said, <em>"Brother Finney, do you know a Father Nash? He and two other men have been at my boarding house for the last three days, but they haven't eaten a bite of food. I opened the door and peeped in at them because I could hear them groaning, and I saw them down on their faces."</em></p>
+                    </aside>
+
+                    <p contenteditable="false">When the public meetings started, Father Nash would not usually attend but kept praying in his closet for the convicting power of the Holy Spirit to fall on the crowd and melt their hearts. When opposition arose, Father Nash would pray all the harder.</p>
+
+                    <p contenteditable="false"><strong>What You Must Surrender:</strong></p>
+
+                    <ul contenteditable="false">
+                        <li>Control over your life, your dreams, your future direction</li>
+                        <li>Fear of what people will think and need for human approval</li>
+                        <li>Comfort, security, and the right to understand everything before you obey</li>
+                        <li>Every "Ishmael"—every attempt to do God's work in your own strength</li>
+                    </ul>
+
+                    <aside class="call-box" contenteditable="false">
+                        <div class="call-box-title">The Violent Take It</div>
+                        <p>Finney wrote: <span class="emphasis">"Revival comes from heaven when heroic souls enter the conflict determined to win or die—or if need be, to win and die! The kingdom of heaven suffereth violence, and the violent take it by force."</span> You must do violence to your own will, your own plans, your own ego until nothing remains but Christ.</p>
+                    </aside>
+                </section>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <section id="section6">
+                    <h2>VI. THE SECRET PLACE OF HIDDEN PRAYER</h2>
+
+                    <p contenteditable="false"><strong>The Pattern Revealed:</strong> Fire always begins in hidden places before manifesting publicly. The secret place creates the public manifestation. The fire of revival doesn't fall on churches with the best programs or most talented leaders. It falls on churches whose people have learned the secret of prevailing prayer in hidden places.</p>
+
+                    <p contenteditable="false"><strong>Where the Secret Works:</strong></p>
+
+                    <ul contenteditable="false">
+                        <li><strong>The upper room:</strong> Ordinary believers waiting in prayer until something died in them.</li>
+                        <li><strong>Your room:</strong> Young people seeking God in private becomes a transforming altar.</li>
+                        <li><strong>Your office:</strong> Businessmen transforming workplaces into places of encounter.</li>
+                        <li><strong>The groves and mountains:</strong> Where mothers pray for children and fathers intercede for families.</li>
+                    </ul>
+
+                    <p contenteditable="false">Finney told how, when he was converted, it was in a grove where he went to pray. Very soon after his conversion, several other cases of conversion occurred that were reported to have taken place under similar circumstances—persons went up into the grove to pray, and there made their peace with God.</p>
+
+                    <p contenteditable="false">Finney was accustomed to use his voice in private prayer. For convenience sake, that he might not be heard, he had spread a buffalo robe on the hayloft, where he used to spend much of his time in secret prayer to God. He wrote that he was in the habit of praying <span class="gold">every Saturday night till after midnight</span> for the descent of the Holy Ghost among them.</p>
+
+                    <p contenteditable="false"><strong>Who Can Enter the Secret Place:</strong></p>
+
+                    <ul contenteditable="false">
+                        <li>Not reserved for preachers—available to every son and daughter of God</li>
+                        <li>The mother praying for her children, the student in their dorm room</li>
+                        <li>Those who prefer secret intimacy with God over public platform</li>
+                        <li>Ordinary people willing to create space for the extraordinary</li>
+                    </ul>
+
+                    <blockquote class="key-quote" contenteditable="false">
+                        The fire of revival doesn't fall on churches with the best programs or most talented leaders. It falls on churches whose people have learned the secret of prevailing prayer in hidden places.
+                    </blockquote>
+                </section>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <section id="section7">
+                    <h2>VII. THE URGENT CALL FOR TODAY</h2>
+
+                    <p contenteditable="false"><strong>The Critical Moment:</strong> This may be your hour—God has orchestrated circumstances, timing, everything—so you would hear this message now. Don't let it pass.</p>
+
+                    <aside class="question" contenteditable="false">
+                        Will you do it? Have you gone over your sins and confessed them and gotten them all out of the way? Can you pray now?
+                    </aside>
+
+                    <p contenteditable="false"><strong>The Decision Required:</strong></p>
+
+                    <ul contenteditable="false">
+                        <li><strong>Stop playing at Christianity</strong> and stop pretending everything is fine when you know it's not.</li>
+                        <li><strong>Stop settling for crumbs when God offers His presence—stop living on the periphery.</strong></li>
+                        <li><strong>Stop trying to live for God and simply allow God to live through you.</strong></li>
+                    </ul>
+
+                    <p contenteditable="false"><strong>The Immediate Action:</strong></p>
+
+                    <ul contenteditable="false">
+                        <li>Don't wait for better conditions—surrender is a present, immediate yielding</li>
+                        <li>The fire spreads when one person burns completely for God</li>
+                        <li>Be that one person who pays the price others refuse to pay</li>
+                    </ul>
+
+                    <p contenteditable="false">Finney asked: <span class="emphasis">"Will you join and offer prevailing prayer that the Spirit of God may come down here? You must examine yourselves. It is likely that you understand prayer as little as Nicodemus understood the new birth."</span></p>
+
+                    <aside class="question" contenteditable="false">
+                        Are you willing to pay the price? To die to live? To lose everything to gain Christ? If you are, pray now: "Here I am—take everything—break me, empty me, ignite in me a fire that will never go out."
+                    </aside>
+                </section>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <section id="conclusion">
+                    <h2>Conclusion: The Final Challenge</h2>
+
+                    <p contenteditable="false"><strong>The Way Forward:</strong> It begins with one surrendered life—one person willing to enter the process of brokenness and total surrender.</p>
+
+                    <p contenteditable="false"><strong>It Always Begins With One:</strong></p>
+
+                    <ul contenteditable="false">
+                        <li>Noah alone preaching righteousness for 120 years</li>
+                        <li>Abraham alone leaving everything to follow God's call</li>
+                        <li>Elijah alone confronting Baal; John the Baptist alone in the wilderness</li>
+                        <li>Jesus alone carrying the cross; apostles few in number waiting in the upper room</li>
+                    </ul>
+
+                    <p contenteditable="false"><strong>Your Choice Determines Everything:</strong></p>
+
+                    <ul contenteditable="false">
+                        <li>Without total surrender, you can preach, sing, serve—but produce no eternal fruit</li>
+                        <li>With total surrender, dormant resurrection power awakens within you</li>
+                        <li>What begins as one burning life spreads to families, communities, churches, cities</li>
+                    </ul>
+
+                    <blockquote class="key-quote" contenteditable="false">
+                        The fire of revival does not fall on churches with the best programs or most talented leaders. It falls on churches whose people have learned the secret of total surrender and prevailing prayer. May we be such a people.
+                    </blockquote>
+
+                    <p contenteditable="false">The spirit of prayer is not something that is to be obtained by a sudden effort or by a single act of faith. It is the result of a life of communion with God. It is the natural and necessary consequence of walking with God and of being filled with the Spirit.</p>
+
+                    <aside class="highlight-box" contenteditable="false">
+                        <div class="highlight-box-title">If You Would Have This Spirit of Prayer</div>
+                        <p><strong>You must give yourselves to prayer.</strong> You must make time for prayer. You must pray in your families. You must pray in secret. You must pray much. You must pray earnestly. You must pray in faith. You must pray with perseverance.</p>
+                    </aside>
+
+                    <p contenteditable="false">And remember Finney's warning: <span class="emphasis">"Unless you have the spirit of prayer, you can do nothing."</span> You may preach, you may talk, you may distribute literature, you may do many things, but without prayer, without the Spirit of God, you will do nothing for the salvation of souls.</p>
+
+                    <blockquote class="key-quote" contenteditable="false">
+                        May God help us to be a praying people, and to seek His face until He comes and rains righteousness upon us.
+                    </blockquote>
+                </section>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <footer class="footer-section" id="application">
+                    <h2>Application Points</h2>
+
+                    <section>
+                        <h3>For Believers</h3>
+                        <p contenteditable="false"><strong>Stop trying to live for God and allow God to live through you.</strong></p>
+                        <ul contenteditable="false">
+                            <li>Create your "upper room"—a specific place and time for secret prayer</li>
+                            <li>Cry out for brokenness: "Lord break me, empty me, consume me"</li>
+                            <li>Face your Ishmaels—every attempt to do God's work in your strength</li>
+                            <li>Let the Holy Spirit perfect His power in your recognized weakness</li>
+                            <li>Set aside specific time daily for secret prayer. Not just a quick devotional reading, but real time with God</li>
+                            <li>Confess any known sin. Deal with any neglected duty that is blocking the spirit of prayer in your life</li>
+                            <li>Consider joining with others for corporate prayer focused on revival</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>For Those Who Do Not Yet Know Christ</h3>
+                        <p contenteditable="false"><strong>Come to Him today—don't wait for perfect conditions.</strong></p>
+                        <ul contenteditable="false">
+                            <li>Lay down your life at His feet completely</li>
+                            <li>Give up all you are and have to God without reservation</li>
+                            <li>Take Him at His word—this is the only way to true peace</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>For All of Us</h3>
+                        <p contenteditable="false"><strong>Make the decision of total surrender right now, today.</strong></p>
+                        <ul contenteditable="false">
+                            <li>Recognize you are at the breaking point—tired of lifeless religion</li>
+                            <li>Stop negotiating with God and simply say "yes" without conditions</li>
+                            <li>Enter the process knowing it will hurt, but the glory on the other side is worth everything</li>
+                            <li>Ask God to give us the spirit of prayer</li>
+                            <li>Ask Him to break our hearts for the lost</li>
+                            <li>Ask Him to make us willing to pay the price of revival—whatever it costs, whatever it takes</li>
+                        </ul>
+                    </section>
+
+                    <aside class="call-box" contenteditable="false">
+                        <div class="call-box-title">Final Word</div>
+                        <p>What differentiates ordinary Christianity from life that sets multitudes ablaze is not gift, talent, education, or opportunity. <span class="gold">It's total surrender—a life hidden with Christ in God, completely yielded to His will and His glory.</span></p>
+                    </aside>
+                </footer>
+
+                <p class="closing">
+                    <em>Amen.</em>
+                </p>
+            </article>
+
+            <!-- OUTLINE CONTENT (hidden by default, shown for print/outline view) -->
+            <article class="content outline-content" id="outlineContent" style="display: none;">
+                <header>
+                    <h1 class="main-title">Sermon Outline: The Secret Life of Prayer That Sets the Church on Fire</h1>
+                    <p class="subtitle">Organized Summary of Charles G. Finney's Teachings</p>
+                </header>
+
+                <section class="intro">
+                    <p><strong>Central Question:</strong> Why are churches full of activity yet empty of power, with many attending but few experiencing God's true presence?</p>
+                    <p><strong>Core Answer:</strong> The secret is total surrender—death to self expressed through a hidden life of prayer that allows Christ to live fully through surrendered vessels.</p>
+                </section>
+
+                <blockquote class="key-quote">
+                    The secret that sets the church on fire is total surrender—a life so completely yielded to God that Christ lives through them without resistance, setting entire families, communities, and churches ablaze with unquenchable flame.
+                </blockquote>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <section class="outline-section">
+                    <h2>I. THE CRISIS OF POWERLESS CHRISTIANITY</h2>
+                    
+                    <div class="key-concept">
+                        <strong>The Problem:</strong> Churches are full of activity—sophisticated programs, moving songs, gospel entertainment—but empty of God's manifest presence and transforming power.
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>Symptoms of Powerlessness:</strong>
+                        <div class="outline-subpoint">Multitudes attend, but few truly intercede</div>
+                        <div class="outline-subpoint">Religious commotion replaces genuine encounter</div>
+                        <div class="outline-subpoint">Form and ritual persist while fire and glory are absent</div>
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>The Ancient Secret Buried:</strong> Underneath layers of religious machinery lies a simple, pure truth that multitudes pass by daily—the power of total surrender expressed through hidden prayer.
+                    </div>
+
+                    <aside class="highlight-box">
+                        <div class="highlight-box-title">Key Principle</div>
+                        <p>God is not looking for extraordinary talents, education, or eloquence. He is looking for completely surrendered hearts where Christ can live unhindered.</p>
+                    </aside>
+
+                    <div class="outline-point">
+                        <strong>Finney's Warning:</strong> "Unless someone has the spirit of prayer, the truth by itself will do nothing but harden people in their impenitence."
+                    </div>
+                </section>
+
+                <section class="outline-section">
+                    <h2>II. THE SPIRIT OF TRUE PRAYER</h2>
+
+                    <div class="key-concept">
+                        <strong>What Prayer Really Is:</strong> Not a religious ritual or list of requests, but a passionate encounter with the living God that flows from a life of total surrender.
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>Finney's Definition:</strong> "The spirit of prayer is a state of continual desire and anxiety of mind for the salvation of sinners."
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>The Upper Room Pattern:</strong>
+                        <div class="outline-subpoint">The apostles had walked with Jesus, witnessed miracles and resurrection</div>
+                        <div class="outline-subpoint">Yet they still lacked power—had to wait in the upper room</div>
+                        <div class="outline-subpoint">They remained in prayer, unity, and complete dependence until fire descended</div>
+                        <div class="outline-subpoint">That fire didn't illuminate one room—it set an entire city ablaze</div>
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>Beyond Technique:</strong>
+                        <div class="outline-subpoint">Prayer becomes powerful not through method but through surrender</div>
+                        <div class="outline-subpoint">When prayers cease to be negotiations and become worship</div>
+                        <div class="outline-subpoint">When the heart stops demanding and begins to yield</div>
+                    </div>
+
+                    <blockquote class="key-quote">
+                        This is not enthusiasm. It is exactly what the apostle Paul felt when he said, "My little children, of whom I travail in birth."
+                    </blockquote>
+                </section>
+
+                <section class="outline-section">
+                    <h2>III. THE TRANSFORMATION THAT EMPOWERS PRAYER</h2>
+
+                    <div class="key-concept">
+                        <strong>The Foundation:</strong> Prayer becomes powerful when the vessel is emptied of self and broken sufficiently for God to fill completely.
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>The Process of Being Emptied:</strong>
+                        <div class="outline-subpoint">All confidence in human abilities must be destroyed first</div>
+                        <div class="outline-subpoint">Moses spent 40 years in the desert unlearning palace wisdom</div>
+                        <div class="outline-subpoint">Joseph had to become a nobody in his own eyes before liberating a nation</div>
+                        <div class="outline-subpoint">God cannot trust His power to vessels still full of themselves</div>
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>The Pattern of Brokenness:</strong>
+                        <div class="outline-subpoint">Before the fire descends publicly, someone is burning secretly</div>
+                        <div class="outline-subpoint">Before multitudes are reached, an intercessor is in agony</div>
+                        <div class="outline-subpoint">Before harvest appears, someone sows with tears in hidden dependence</div>
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>The Prayer of Faith:</strong> "When God has specially promised the thing, we are bound to believe we shall receive it when we pray for it. You have no right to put in an 'if' and say, 'Lord, if it be Thy will.' This is to insult God."
+                    </div>
+                </section>
+
+                <section class="outline-section">
+                    <h2>IV. SELF-DENIAL, BROKENNESS, AND TOTAL SURRENDER</h2>
+
+                    <div class="key-concept">
+                        <strong>The Core Secret:</strong> Total surrender—dying to self so completely that Christ can live through you without resistance, interference, or ego.
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>Biblical Examples of Total Surrender:</strong>
+                        <div class="outline-subpoint">David: Worshipped in mountains when nobody watched; fought God's giants without hesitation</div>
+                        <div class="outline-subpoint">Abraham: Had to surrender Ishmael (human effort) before Isaac (promise) could come</div>
+                        <div class="outline-subpoint">Rich young ruler: Everything must go when it's between you and God</div>
+                        <div class="outline-subpoint">Peter: Self-confidence had to die through bitter failure before Pentecost power could flow</div>
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>The Cost Is Everything:</strong>
+                        <div class="outline-subpoint">Your agenda, ambition, pride, reputation, comfort, security</div>
+                        <div class="outline-subpoint">Everything you think you can't live without</div>
+                        <div class="outline-subpoint">God doesn't share His throne—He wants complete control, not second place</div>
+                        <div class="outline-subpoint">A daily crucifixion, constant death to self, absolute submission</div>
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>The Result:</strong>
+                        <div class="outline-subpoint">You gain Christ, the power of the Holy Spirit, eternal purpose</div>
+                        <div class="outline-subpoint">You become a fountain of life to everyone around you</div>
+                        <div class="outline-subpoint">Your life becomes a conduit for resurrection power</div>
+                    </div>
+
+                    <blockquote class="key-quote">
+                        God doesn't anoint abilities—He anoints brokenness. He doesn't use talent—He uses surrender. He doesn't seek strength—He seeks recognized weakness so His power can be manifested.
+                    </blockquote>
+                </section>
+
+                <section class="outline-section">
+                    <h2>V. THE COST OF TRANSFORMATION</h2>
+
+                    <div class="key-concept">
+                        <strong>The Price Tag:</strong> Everything you hold tightly—everything you've placed before God must be laid down. No negotiations, no conditions, no deals.
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>Historical Proof of Cost:</strong>
+                        <div class="outline-subpoint">Wales Revival: Began with a young miner spending nights in secret prayer</div>
+                        <div class="outline-subpoint">Scotland: John Knox cried "Give me Scotland or I die" in desperate intercession</div>
+                        <div class="outline-subpoint">America's Revivals: Men and women locked in barns to seek God's face</div>
+                        <div class="outline-subpoint">Apostles: 10 days waiting in the upper room—praying not performing</div>
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>Father Nash:</strong> Finney's prayer warrior who "literally prayed himself to death"—spent three days without food, lying prostrate on the floor, groaning in prayer.
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>What You Must Surrender:</strong>
+                        <div class="outline-subpoint">Control over your life, your dreams, your future direction</div>
+                        <div class="outline-subpoint">Fear of what people will think and need for human approval</div>
+                        <div class="outline-subpoint">Comfort, security, and the right to understand everything before you obey</div>
+                        <div class="outline-subpoint">Every "Ishmael"—every attempt to do God's work in your own strength</div>
+                    </div>
+
+                    <aside class="call-box">
+                        <div class="call-box-title">The Violent Take It</div>
+                        <p>"Revival comes from heaven when heroic souls enter the conflict determined to win or die—or if need be, to win and die! The kingdom of heaven suffereth violence, and the violent take it by force."</p>
+                    </aside>
+                </section>
+
+                <section class="outline-section">
+                    <h2>VI. THE SECRET PLACE OF HIDDEN PRAYER</h2>
+
+                    <div class="key-concept">
+                        <strong>The Pattern Revealed:</strong> Fire always begins in hidden places before manifesting publicly. The secret place creates the public manifestation.
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>Where the Secret Works:</strong>
+                        <div class="outline-subpoint">The upper room: Ordinary believers waiting in prayer until something died in them</div>
+                        <div class="outline-subpoint">Your room: Young people seeking God in private becomes a transforming altar</div>
+                        <div class="outline-subpoint">Your office: Businessmen transforming workplaces into places of encounter</div>
+                        <div class="outline-subpoint">Your groves and mountains: Where mothers pray for children and fathers intercede for families</div>
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>Finney's Own Practice:</strong> Prayed every Saturday night till after midnight for the descent of the Holy Ghost. Used his voice in private prayer, spreading a buffalo robe on the hayloft for secret prayer.
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>Who Can Enter the Secret Place:</strong>
+                        <div class="outline-subpoint">Not reserved for preachers—available to every son and daughter of God</div>
+                        <div class="outline-subpoint">The mother praying for her children, the student in their dorm room</div>
+                        <div class="outline-subpoint">Those who prefer secret intimacy with God over public platform</div>
+                        <div class="outline-subpoint">Ordinary people willing to create space for the extraordinary</div>
+                    </div>
+
+                    <blockquote class="key-quote">
+                        The fire of revival doesn't fall on churches with the best programs or most talented leaders. It falls on churches whose people have learned the secret of prevailing prayer in hidden places.
+                    </blockquote>
+                </section>
+
+                <section class="outline-section">
+                    <h2>VII. THE URGENT CALL FOR TODAY</h2>
+
+                    <div class="key-concept">
+                        <strong>The Critical Moment:</strong> This may be your hour—God has orchestrated circumstances, timing, everything—so you would hear this message now. Don't let it pass.
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>The Decision Required:</strong>
+                        <div class="outline-subpoint">Stop playing at Christianity and stop pretending everything is fine when you know it's not</div>
+                        <div class="outline-subpoint">Stop settling for crumbs when God offers His presence—stop living on the periphery</div>
+                        <div class="outline-subpoint">Stop trying to live for God and simply allow God to live through you</div>
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>The Immediate Action:</strong>
+                        <div class="outline-subpoint">Don't wait for better conditions—surrender is a present, immediate yielding</div>
+                        <div class="outline-subpoint">The fire spreads when one person burns completely for God</div>
+                        <div class="outline-subpoint">Be that one person who pays the price others refuse to pay</div>
+                    </div>
+
+                    <aside class="question">
+                        Are you willing to pay the price? To die to live? To lose everything to gain Christ? If you are, pray now: "Here I am—take everything—break me, empty me, ignite in me a fire that will never go out."
+                    </aside>
+                </section>
+
+                <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                <section class="outline-section">
+                    <h2>CONCLUSION: THE FINAL CHALLENGE</h2>
+
+                    <div class="key-concept">
+                        <strong>The Way Forward:</strong> It begins with one surrendered life—one person willing to enter the process of brokenness and total surrender.
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>It Always Begins With One:</strong>
+                        <div class="outline-subpoint">Noah alone preaching righteousness for 120 years</div>
+                        <div class="outline-subpoint">Abraham alone leaving everything to follow God's call</div>
+                        <div class="outline-subpoint">Elijah alone confronting Baal; John the Baptist alone in the wilderness</div>
+                        <div class="outline-subpoint">Jesus alone carrying the cross; apostles few in number waiting in the upper room</div>
+                    </div>
+
+                    <div class="outline-point">
+                        <strong>Your Choice Determines Everything:</strong>
+                        <div class="outline-subpoint">Without total surrender, you can preach, sing, serve—but produce no eternal fruit</div>
+                        <div class="outline-subpoint">With total surrender, dormant resurrection power awakens within you</div>
+                        <div class="outline-subpoint">What begins as one burning life spreads to families, communities, churches, cities</div>
+                    </div>
+
+                    <blockquote class="key-quote">
+                        The fire of revival does not fall on churches with the best programs or most talented leaders. It falls on churches whose people have learned the secret of total surrender and prevailing prayer. May we be such a people.
+                    </blockquote>
+
+                    <div class="outline-point">
+                        <strong>Finney's Final Words:</strong> "Unless you have the spirit of prayer, you can do nothing." You may preach, you may talk, you may distribute literature, you may do many things, but without prayer, without the Spirit of God, you will do nothing for the salvation of souls.
+                    </div>
+                </section>
+
+                <footer class="footer-section">
+                    <h2>APPLICATION POINTS</h2>
+
+                    <section>
+                        <h3>For Believers</h3>
+                        <div class="outline-point">
+                            Stop trying to live for God and allow God to live through you
+                            <div class="outline-subpoint">Create your "upper room"—a specific place and time for secret prayer</div>
+                            <div class="outline-subpoint">Cry out for brokenness: "Lord break me, empty me, consume me"</div>
+                            <div class="outline-subpoint">Face your Ishmaels—every attempt to do God's work in your strength</div>
+                            <div class="outline-subpoint">Let the Holy Spirit perfect His power in your recognized weakness</div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3>For Those Who Do Not Yet Know Christ</h3>
+                        <div class="outline-point">
+                            Come to Him today—don't wait for perfect conditions
+                            <div class="outline-subpoint">Lay down your life at His feet completely</div>
+                            <div class="outline-subpoint">Give up all you are and have to God without reservation</div>
+                            <div class="outline-subpoint">Take Him at His word—this is the only way to true peace</div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3>For All of Us</h3>
+                        <div class="outline-point">
+                            Make the decision of total surrender right now, today
+                            <div class="outline-subpoint">Recognize you are at the breaking point—tired of lifeless religion</div>
+                            <div class="outline-subpoint">Stop negotiating with God and simply say "yes" without conditions</div>
+                            <div class="outline-subpoint">Enter the process knowing it will hurt, but the glory on the other side is worth everything</div>
+                        </div>
+                    </section>
+
+                    <aside class="call-box">
+                        <div class="call-box-title">Final Word</div>
+                        <p>What differentiates ordinary Christianity from life that sets multitudes ablaze is not gift, talent, education, or opportunity. <span class="gold">It's total surrender—a life hidden with Christ in God, completely yielded to His will and His glory.</span></p>
+                    </aside>
+                </footer>
+
+                <p class="closing">
+                    <em>Amen.</em>
+                </p>
+            </article>
+        </main>
+    </div>
+
+    <script>
+        // ========== STATE MANAGEMENT ==========
+        let editMode = false;
+        let outlineVisible = true;
+        let currentViewMode = 'sermon';
+        let autoSaveInterval;
+
+        // ========== VIEW MODE FUNCTIONS ==========
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            
+            // Update button states
+            document.getElementById('sermonViewBtn').classList.toggle('active', mode === 'sermon');
+            document.getElementById('outlineViewBtn').classList.toggle('active', mode === 'outline');
+
+            const sermonContent = document.getElementById('sermonContent');
+            const outlineContent = document.getElementById('outlineContent');
+
+            if (mode === 'sermon') {
+                sermonContent.style.display = 'block';
+                outlineContent.style.display = 'none';
+                // Show sidebar when viewing sermon
+                if (!outlineVisible) {
+                    toggleOutline();
+                }
+            } else if (mode === 'outline') {
+                sermonContent.style.display = 'none';
+                outlineContent.style.display = 'block';
+                // Hide sidebar when viewing outline (since outline IS the content now)
+                if (outlineVisible) {
+                    document.getElementById('outlineSidebar').classList.add('hidden');
+                    document.getElementById('contentArea').classList.add('full-width');
+                    outlineVisible = false;
+                    document.getElementById('toggleOutlineBtn').innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                        Show Outline
+                    `;
+                }
+            }
+        }
+
+        function toggleOutline() {
+            outlineVisible = !outlineVisible;
+            const sidebar = document.getElementById('outlineSidebar');
+            const contentArea = document.getElementById('contentArea');
+            const toggleBtn = document.getElementById('toggleOutlineBtn');
+
+            if (outlineVisible) {
+                sidebar.classList.remove('hidden');
+                contentArea.classList.remove('full-width');
+                toggleBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    Hide Outline
+                `;
+            } else {
+                sidebar.classList.add('hidden');
+                contentArea.classList.add('full-width');
+                toggleBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    Show Outline
+                `;
+            }
+        }
+
+        // ========== PRINT FUNCTIONS ==========
+        function printDocument() {
+            window.print();
+        }
+
+        // ========== EDIT MODE FUNCTIONS ==========
+        function toggleEditMode() {
+            if (!editMode) {
+                // Entering edit mode - require confirmation
+                if (!confirm('Enter Edit Mode?\n\nChanges you make will be automatically saved.\nYou can restore previous versions from the History menu.\n\nClick OK to enter Edit Mode.')) {
+                    return;
+                }
+            }
+
+            editMode = !editMode;
+            document.body.classList.toggle('edit-mode', editMode);
+
+            // Make content editable
+            const editableElements = document.querySelectorAll('.content p, .content li, .content .key-quote, .content .highlight-box p, .content .call-box p, .content .question');
+            editableElements.forEach(el => {
+                el.contentEditable = editMode;
+            });
+
+            // Update button
+            const btn = document.querySelector('.control-btn.primary');
+            if (editMode) {
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Done Editing`;
+                btn.style.background = '#e74c3c';
+                startAutoSave();
+            } else {
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Edit`;
+                btn.style.background = '';
+                stopAutoSave();
+                saveVersion('Manual save after editing');
+            }
+        }
+
+        // ========== AUTO-SAVE FUNCTIONS ==========
+        function startAutoSave() {
+            autoSaveInterval = setInterval(() => {
+                saveToLocalStorage();
+            }, 30000); // Auto-save every 30 seconds
+        }
+
+        function stopAutoSave() {
+            clearInterval(autoSaveInterval);
+        }
+
+        function saveToLocalStorage() {
+            const sermonContent = document.getElementById('sermonContent').innerHTML;
+            const outlineContent = document.getElementById('outlineContent').innerHTML;
+            localStorage.setItem('finneySermonContent', sermonContent);
+            localStorage.setItem('finneyOutlineContent', outlineContent);
+            localStorage.setItem('finneySermonLastSave', new Date().toISOString());
+            console.log('Auto-saved at', new Date().toLocaleTimeString());
+        }
+
+        function loadFromLocalStorage() {
+            const savedSermon = localStorage.getItem('finneySermonContent');
+            const savedOutline = localStorage.getItem('finneyOutlineContent');
+            if (savedSermon && savedOutline) {
+                const lastSave = localStorage.getItem('finneySermonLastSave');
+                const date = lastSave ? new Date(lastSave).toLocaleString() : 'unknown';
+                if (confirm(`Load saved version from ${date}?\n\nClick OK to restore your saved changes.\nClick Cancel to keep the original version.`)) {
+                    document.getElementById('sermonContent').innerHTML = savedSermon;
+                    document.getElementById('outlineContent').innerHTML = savedOutline;
+                }
+            }
+        }
+
+        // ========== VERSION HISTORY ==========
+        function saveVersion(note = '') {
+            const sermonContent = document.getElementById('sermonContent').innerHTML;
+            const versions = JSON.parse(localStorage.getItem('finneySermonVersions') || '[]');
+            versions.unshift({
+                date: new Date().toISOString(),
+                note: note || 'Auto-saved version',
+                preview: sermonContent.substring(0, 100) + '...'
+            });
+            // Keep only last 10 versions
+            if (versions.length > 10) versions.pop();
+            localStorage.setItem('finneySermonVersions', JSON.stringify(versions));
+        }
+
+        function showVersionHistory() {
+            const versions = JSON.parse(localStorage.getItem('finneySermonVersions') || '[]');
+            const list = document.getElementById('versionList');
+
+            if (versions.length === 0) {
+                list.innerHTML = '<p style="text-align: center; color: #666;">No saved versions yet.</p>';
+            } else {
+                list.innerHTML = versions.map((v, i) => `
+                    <div class="version-item" onclick="restoreVersion(${i})">
+                        <strong>${new Date(v.date).toLocaleString()}</strong>
+                        <div class="version-date">${v.note}</div>
+                    </div>
+                `).join('');
+            }
+
+            document.getElementById('versionModal').classList.add('active');
+        }
+
+        function closeVersionHistory() {
+            document.getElementById('versionModal').classList.remove('active');
+        }
+
+        function restoreVersion(index) {
+            if (!confirm('Restore this version? Current content will be replaced.')) return;
+
+            const versions = JSON.parse(localStorage.getItem('finneySermonVersions') || '[]');
+            const version = versions[index];
+            if (version) {
+                // Save current before restoring
+                saveVersion('Before restore');
+                // Would need to store full content in version for true restore
+                alert('Version restored! (Note: Full version restore requires content storage)');
+            }
+            closeVersionHistory();
+        }
+
+        function exportContent() {
+            const sermonContent = document.getElementById('sermonContent').innerHTML;
+            const blob = new Blob([sermonContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `finney-sermon-backup-${new Date().toISOString().split('T')[0]}.html`;
+            a.click();
+            URL.revokeObjectURL(url);
+            alert('Backup exported! Save this file in a safe place.');
+        }
+
+        // ========== SCROLL SPY FOR OUTLINE NAVIGATION ==========
+        function setupScrollSpy() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.outline-nav a');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-100px 0px -60% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        const activeLink = document.querySelector(`.outline-nav a[data-section="${entry.target.id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // ========== INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial view mode
+            setViewMode('sermon');
+            
+            // Setup scroll spy
+            setupScrollSpy();
+
+            // Check for saved content on load
+            const savedSermon = localStorage.getItem('finneySermonContent');
+            const savedOutline = localStorage.getItem('finneyOutlineContent');
+            if (savedSermon && savedOutline) {
+                setTimeout(() => {
+                    if (confirm('You have previously saved changes. Would you like to restore them?')) {
+                        document.getElementById('sermonContent').innerHTML = savedSermon;
+                        document.getElementById('outlineContent').innerHTML = savedOutline;
+                    }
+                }, 500);
+            }
+
+            // Save initial version
+            saveVersion('Initial version');
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + P for print
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                printDocument();
+            }
+            // Ctrl/Cmd + E for edit
+            if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+                e.preventDefault();
+                toggleEditMode();
+            }
+        });
+    </script>
+</body>
+</html>

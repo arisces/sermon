@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    <title>The Secret Life That Sets the Church on Fire - Finney Sermon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --color-primary: #2c3e50; --color-secondary: #34495e; --color-accent: #c9a227; --color-accent-dark: #a68521;
+            --color-text: #2d2d2d; --color-text-light: #5d6d7e; --color-bg: #ffffff; --color-bg-warm: #fdfcfa;
+            --color-bg-highlight: #f8f6f0; --color-border: #e8e6e0; --color-border-accent: #c9a227;
+            --color-edit-bg: #fff8e1; --color-edit-border: #ffc107;
+            --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --line-height-body: 1.75; --line-height-heading: 1.3; --max-width: 65ch; --print-margin: 1in;
+            --spacing-section: 2rem; --spacing-para: 1rem;
+            --content-margin: 1.5rem;
+        }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-serif); font-size: 1.0625rem; line-height: var(--line-height-body);
+            color: var(--color-text); background-color: var(--color-bg-warm);
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Toolbar Styles */
+        .toolbar {
+            position: fixed; top: 0; left: 0; right: 0; background: var(--color-primary);
+            padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 0.5rem; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            min-height: 56px;
+        }
+        .toolbar-title { font-family: var(--font-serif); font-size: 1rem; color: #fff; font-weight: 600; }
+        .toolbar-title span { color: var(--color-accent); }
+        .toolbar-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .toolbar-btn {
+            display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.5rem 0.875rem;
+            background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px; font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease; min-height: 44px; min-width: 44px;
+        }
+        .toolbar-btn:hover { background: rgba(255,255,255,0.2); }
+        .toolbar-btn.primary { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-primary); }
+        .toolbar-btn.primary:hover { background: var(--color-accent-dark); border-color: var(--color-accent-dark); }
+        .toolbar-btn.editing { background: #e74c3c; border-color: #e74c3c; }
+        .toolbar-btn svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+        
+        /* Sidebar Toggle Button */
+        .sidebar-toggle {
+            position: fixed; left: 0; top: 56px; z-index: 999;
+            background: var(--color-primary); color: white; border: none;
+            padding: 0.75rem; cursor: pointer; border-radius: 0 4px 4px 0;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 44px; min-width: 44px;
+            transition: left 0.3s ease;
+        }
+        .sidebar-toggle:hover { background: var(--color-secondary); }
+        .sidebar-toggle svg { width: 1.25rem; height: 1.25rem; }
+        .sidebar-toggle.hidden { display: none; }
+        
+        /* Edit Mode Banner */
+        .edit-mode-banner {
+            display: none; position: fixed; top: 56px; left: 0; right: 0; background: #e74c3c;
+            color: white; text-align: center; padding: 0.5rem; font-size: 0.875rem; font-weight: 600; z-index: 998;
+            font-family: var(--font-sans);
+        }
+        body.editing .edit-mode-banner { display: block; }
+        
+        /* Main Container */
+        .main-container { margin-top: 56px; display: flex; min-height: calc(100vh - 56px); }
+        body.editing .main-container { margin-top: 96px; }
+        
+        /* Navigation Sidebar */
+        .nav-sidebar {
+            width: 260px; background: var(--color-bg); border-right: 1px solid var(--color-border);
+            padding: 1rem; position: fixed; height: calc(100vh - 56px); overflow-y: auto; z-index: 100;
+            left: -260px; transition: left 0.3s ease; top: 56px;
+        }
+        .nav-sidebar.open { left: 0; }
+        body.editing .nav-sidebar { height: calc(100vh - 96px); top: 96px; }
+        
+        .nav-section { margin-bottom: 1.25rem; }
+        .nav-title {
+            font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 700; color: var(--color-text-light);
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;
+        }
+        .nav-link {
+            display: block; padding: 0.5rem 0.75rem; color: var(--color-text); text-decoration: none;
+            font-family: var(--font-sans); font-size: 0.8125rem; border-radius: 4px; margin-bottom: 0.125rem;
+            transition: all 0.2s ease; cursor: pointer; min-height: 36px;
+        }
+        .nav-link:hover { background: var(--color-bg-highlight); color: var(--color-primary); }
+        .nav-link.active { background: var(--color-primary); color: white; }
+        
+        /* Content Area */
+        .content-area { 
+            flex: 1; margin-left: 0; 
+            padding: 2rem var(--content-margin, 1.5rem); 
+            max-width: 100%; transition: margin-left 0.3s ease, padding 0.2s ease;
+        }
+        .content-area.sidebar-open { margin-left: 260px; }
+        
+        /* Margin Controls */
+        .margin-controls {
+            display: flex; align-items: center; gap: 0.25rem;
+            background: rgba(255,255,255,0.1); border-radius: 4px;
+            padding: 0.25rem;
+        }
+        .margin-label {
+            font-family: var(--font-sans); font-size: 0.6875rem;
+            color: rgba(255,255,255,0.7); text-transform: uppercase;
+            padding: 0 0.25rem;
+        }
+        .margin-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 28px; height: 28px;
+            background: rgba(255,255,255,0.15); color: white;
+            border: none; border-radius: 3px;
+            font-family: var(--font-sans); font-size: 1rem; font-weight: 700;
+            cursor: pointer; transition: all 0.2s ease;
+        }
+        .margin-btn:hover { background: rgba(255,255,255,0.3); }
+        .margin-btn:active { transform: scale(0.95); }
+        
+        .content-section { 
+            display: none; max-width: var(--max-width); margin: 0 auto; background: var(--color-bg);
+            padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .content-section.active { display: block; }
+        
+        /* Typography */
+        h1.main-title { 
+            font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; 
+            color: var(--color-primary); text-align: center; margin-bottom: 0.5rem; 
+            line-height: var(--line-height-heading); 
+        }
+        .subtitle { 
+            font-family: var(--font-serif); font-size: 1.0625rem; font-style: italic; 
+            color: var(--color-text-light); text-align: center; margin-bottom: 2rem; 
+        }
+        .sermon-meta { 
+            text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; 
+            border-bottom: 2px solid var(--color-accent); 
+        }
+        .sermon-meta p { 
+            font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-text-light); 
+            margin-bottom: 0.25rem; 
+        }
+        h2 { 
+            font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; 
+            color: var(--color-primary); margin-top: var(--spacing-section); margin-bottom: 1rem; 
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-accent); 
+            scroll-margin-top: 80px;
+        }
+        h3 { 
+            font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 700; 
+            color: var(--color-secondary); margin-top: 1.5rem; margin-bottom: 0.75rem; 
+            text-transform: uppercase; letter-spacing: 0.5px; 
+        }
+        p { 
+            margin-bottom: var(--spacing-para); text-align: justify; text-align-last: left;
+            font-family: var(--font-serif); font-size: 1.0625rem; line-height: 1.75;
+        }
+        
+        /* Key Quote */
+        .key-quote { 
+            background: var(--color-primary); color: #ffffff; padding: 1.25rem 1.5rem; 
+            margin: 1.5rem 0; border-left: 4px solid var(--color-accent); 
+            font-family: var(--font-serif); font-size: 1.0625rem; font-weight: 600; 
+            line-height: 1.6; border-radius: 0 4px 4px 0; 
+        }
+        .key-quote::before { 
+            content: '"'; font-size: 2.5rem; color: var(--color-accent); 
+            font-family: var(--font-serif); line-height: 0; vertical-align: -12px; margin-right: 0.5rem; 
+        }
+        .key-quote small {
+            display: block; margin-top: 0.5rem; font-size: 0.875rem; opacity: 0.8;
+            font-family: var(--font-sans); font-weight: 400;
+        }
+        
+        /* Highlight Box */
+        .highlight-box { 
+            background: var(--color-bg-highlight); border: 1px solid var(--color-border-accent); 
+            padding: 1.125rem 1.375rem; margin: 1.25rem 0; border-radius: 4px; 
+        }
+        .highlight-box-title { 
+            font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; 
+            color: var(--color-accent-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.625rem; 
+        }
+        .highlight-box p { 
+            margin: 0; font-family: var(--font-serif); font-size: 1rem; 
+        }
+        .highlight-box ul {
+            margin: 0.5rem 0 0 1.5rem; font-family: var(--font-serif); font-size: 1rem;
+        }
+        .highlight-box li {
+            margin-bottom: 0.375rem;
+        }
+        
+        /* Scripture Reference */
+        .scripture-ref { 
+            font-style: italic; color: var(--color-secondary); font-weight: 600; 
+        }
+        
+        /* Section Divider */
+        .section-divider { 
+            text-align: center; margin: 2rem 0; color: var(--color-border); 
+            font-size: 1rem; letter-spacing: 8px; font-family: var(--font-serif); 
+        }
+        
+        /* Preacher Note */
+        .preacher-note { 
+            font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-accent-dark); 
+            font-style: italic; margin: 1rem 0; padding: 0.5rem 0; 
+        }
+        .preacher-note::before { content: "[Note: "; }
+        .preacher-note::after { content: "]"; }
+        
+        /* Editable Content */
+        .editable-content { outline: none; }
+        body.editing .editable-content { 
+            background: var(--color-edit-bg); border: 1px dashed var(--color-edit-border); 
+            padding: 0.5rem; border-radius: 4px; min-height: 100px; 
+        }
+        body.editing .editable-content:focus { 
+            border-style: solid; box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3); 
+        }
+        
+        /* Outline Styles */
+        .outline-point { margin-left: 1.5rem; margin-bottom: 0.75rem; position: relative; }
+        .outline-point::before { content: "•"; color: var(--color-accent); font-weight: bold; position: absolute; left: -1rem; }
+        .outline-subpoint { margin-left: 2.5rem; margin-bottom: 0.5rem; font-size: 0.9375rem; color: var(--color-text-light); font-family: var(--font-sans); }
+        .outline-subpoint::before { content: "◦"; color: var(--color-secondary); margin-right: 0.5rem; }
+        .key-concept { 
+            background: var(--color-bg-highlight); border-left: 3px solid var(--color-accent); 
+            padding: 0.75rem 1rem; margin: 1rem 0; font-weight: 600; font-family: var(--font-serif);
+        }
+        
+        /* Modal */
+        .modal-overlay { 
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+            background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; 
+        }
+        .modal-overlay.active { display: flex; }
+        .modal { 
+            background: white; padding: 2rem; border-radius: 8px; max-width: 400px; 
+            text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); margin: 1rem;
+        }
+        .modal h3 { 
+            margin-top: 0; text-transform: none; font-family: var(--font-serif); font-size: 1.25rem;
+            color: var(--color-primary);
+        }
+        .modal p { 
+            text-align: center; margin-bottom: 1.5rem; font-family: var(--font-sans); font-size: 0.9375rem;
+        }
+        .modal-buttons { display: flex; gap: 1rem; justify-content: center; }
+        .modal-btn { 
+            padding: 0.75rem 1.5rem; border: none; border-radius: 4px; font-weight: 600; 
+            cursor: pointer; transition: all 0.2s ease; font-family: var(--font-sans); min-height: 44px;
+        }
+        .modal-btn.confirm { background: var(--color-accent); color: var(--color-primary); }
+        .modal-btn.cancel { background: #ecf0f1; color: var(--color-text); }
+        
+        /* Help Section */
+        .help-section {
+            background: var(--color-bg-highlight); border: 1px solid var(--color-border);
+            padding: 1rem; margin: 1rem 0; border-radius: 4px; font-size: 0.875rem;
+        }
+        .help-section h4 {
+            font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        .help-section ul {
+            margin-left: 1.25rem; font-family: var(--font-sans);
+        }
+        .help-section li {
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .toolbar, .edit-mode-banner, .nav-sidebar, .modal-overlay, .sidebar-toggle, .help-section { 
+                display: none !important; 
+            }
+            body { 
+                background: white !important; font-size: 11pt; line-height: 1.6; 
+                margin-top: 0 !important;
+            }
+            body.editing .main-container { margin-top: 0; }
+            .main-container { margin-top: 0; }
+            .content-area { margin-left: 0 !important; max-width: 100%; padding: 0; }
+            .content-section { display: block !important; box-shadow: none; padding: 0; max-width: 100%; }
+            body.print-outline #sermon-section { display: none !important; }
+            body.print-sermon #outline-section { display: none !important; }
+            h1.main-title { font-size: 18pt; color: #000; }
+            h2 { font-size: 14pt; color: #000; border-bottom-color: #666; page-break-after: avoid; }
+            h3 { font-size: 11pt; color: #333; page-break-after: avoid; }
+            .key-quote { background: #f5f5f5 !important; color: #000 !important; border-left-color: #666; }
+            .key-quote::before { color: #666; }
+            .highlight-box { background: #fafafa !important; border-color: #999; }
+            .preacher-note { display: none; }
+            .key-quote, .highlight-box { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .toolbar { padding: 0.5rem; }
+            .toolbar-title { font-size: 0.8125rem; }
+            .toolbar-btn { padding: 0.5rem; font-size: 0.75rem; }
+            .toolbar-btn span { display: none; }
+            .content-area { 
+                padding: 1rem var(--content-margin, 1rem); 
+            }
+            .content-area.sidebar-open { margin-left: 0; }
+            .content-section { padding: 1.25rem; }
+            h1.main-title { font-size: 1.5rem; }
+            h2 { font-size: 1.25rem; }
+            .nav-sidebar { width: 240px; left: -240px; }
+            .nav-sidebar.open { left: 0; }
+            p { font-size: 1rem; }
+            .margin-controls { display: none; } /* Hide margin controls on small screens */
+        }
+        
+        @media (max-width: 480px) {
+            .toolbar-buttons { width: 100%; justify-content: center; }
+            h1.main-title { font-size: 1.375rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Edit Mode Banner -->
+    <div class="edit-mode-banner">EDIT MODE ACTIVE — Tap text to edit. Changes save automatically. Tap "Done Editing" to exit.</div>
+    
+    <!-- Toolbar -->
+    <nav class="toolbar">
+        <div class="toolbar-title">The Secret Life <span>That Sets the Church on Fire</span></div>
+        <div class="toolbar-buttons">
+            <button class="toolbar-btn" onclick="showSection('sermon')" title="View Sermon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+                <span>Sermon</span>
+            </button>
+            <button class="toolbar-btn" onclick="showSection('outline')" title="View Outline">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+                <span>Outline</span>
+            </button>
+            <button class="toolbar-btn" onclick="printSermon()" title="Print Sermon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                <span>Print Sermon</span>
+            </button>
+            <button class="toolbar-btn" onclick="printOutline()" title="Print Outline">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                <span>Print Outline</span>
+            </button>
+            <button class="toolbar-btn primary" id="editBtn" onclick="toggleEditMode()" title="Toggle Edit Mode">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                <span id="editBtnText">Edit</span>
+            </button>
+            <button class="toolbar-btn" onclick="revertChanges()" title="Revert to Last Saved">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="1 4 1 10 7 10"></polyline>
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                </svg>
+                <span>Revert</span>
+            </button>
+            <!-- Margin Controls -->
+            <div class="margin-controls" title="Adjust Side Margins">
+                <span class="margin-label">Margin</span>
+                <button class="margin-btn" onclick="decreaseMargin()" title="Decrease Margins (Wider Text)">−</button>
+                <button class="margin-btn" onclick="increaseMargin()" title="Increase Margins (Narrower Text)">+</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Sidebar Toggle Button (Navigation Panel Icon) -->
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" title="Toggle Navigation Panel">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+    </button>
+    
+    <!-- Edit Mode Confirmation Modal -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <h3>Enter Edit Mode?</h3>
+            <p>You are about to enter edit mode where you can modify the sermon and outline text. Tap OK to continue, or Cancel to stay in reading mode.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn confirm" onclick="confirmEditMode()">OK — Edit</button>
+                <button class="modal-btn cancel" onclick="cancelEditMode()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Revert Confirmation Modal -->
+    <div class="modal-overlay" id="revertModal">
+        <div class="modal">
+            <h3>Revert Changes?</h3>
+            <p>This will undo all changes made since the last checkpoint. Are you sure?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn confirm" onclick="confirmRevert()">Yes, Revert</button>
+                <button class="modal-btn cancel" onclick="cancelRevert()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Navigation Sidebar -->
+        <aside class="nav-sidebar" id="navSidebar">
+            <div class="nav-section">
+                <div class="nav-title">Navigate To</div>
+                <a class="nav-link active" onclick="showSection('sermon'); return false;" id="nav-sermon">Full Sermon</a>
+                <a class="nav-link" onclick="showSection('outline'); return false;" id="nav-outline">Preacher's Outline</a>
+            </div>
+            <div class="nav-section" id="sermonNavLinks">
+                <div class="nav-title">Sermon Sections</div>
+                <a class="nav-link" onclick="scrollToSection('intro'); return false;" data-section="intro">Introduction</a>
+                <a class="nav-link" onclick="scrollToSection('section1'); return false;" data-section="section1">I. The Secret Place</a>
+                <a class="nav-link" onclick="scrollToSection('section2'); return false;" data-section="section2">II. Spirit of Prayer</a>
+                <a class="nav-link" onclick="scrollToSection('section3'); return false;" data-section="section3">III. Death to Self</a>
+                <a class="nav-link" onclick="scrollToSection('section4'); return false;" data-section="section4">IV. Upper Room</a>
+                <a class="nav-link" onclick="scrollToSection('section-revival'); return false;" data-section="section-revival">V. What Is Revival</a>
+                <a class="nav-link" onclick="scrollToSection('section5'); return false;" data-section="section5">VI. Father Nash</a>
+                <a class="nav-link" onclick="scrollToSection('section6'); return false;" data-section="section6">VII. The Call</a>
+                <a class="nav-link" onclick="scrollToSection('conclusion'); return false;" data-section="conclusion">Conclusion</a>
+            </div>
+        </aside>
+        
+        <!-- Content Area -->
+        <main class="content-area" id="contentArea">
+            <!-- SERMON SECTION -->
+            <section id="sermon-section" class="content-section active">
+                <div class="editable-content" id="sermonContent" data-storage-key="finney-sermon-content-v3">
+                    <!-- SERMON TEXT START -->
+                    <header>
+                        <h1 class="main-title">The Secret Life That Sets the Whole Church on Fire</h1>
+                        <p class="subtitle">A Sermon Based on the Teachings of Charles G. Finney</p>
+                        <div class="sermon-meta">
+                            <p><strong>Main Text:</strong> Matthew 6:6 (NIV)</p>
+                            <p><strong>Big Idea:</strong> When believers cultivate a hidden life of surrendered, prevailing prayer in the secret place, the Holy Spirit ignites them with a fire that sets entire churches—and communities—ablaze for the Kingdom of God.</p>
+                        </div>
+                    </header>
+
+                    <h2 id="intro">Introduction: The Crisis of Powerless Christianity</h2>
+                    <p>There is a secret that transformed ordinary men into spiritual giants, a secret that caused entire churches to be shaken by the power of God. This secret has been buried under religious programs, gospel entertainment, and lukewarm Christianity.</p>
+                    <p>Why are so many churches full of activity yet empty of power? Why do multitudes attend, but few truly intercede? Why does religious commotion replace genuine encounter? The answer is not found in better marketing strategies or more relevant music. It is not discovered in the latest church growth methodologies.</p>
+                    <p>God is not looking for extraordinary talents, education, or eloquence. He is looking for completely surrendered hearts where Christ can live unhindered.</p>
+                    <p>The prophet Samuel understood this when he declared, <span class="scripture-ref">"Does the Lord delight in burnt offerings and sacrifices as much as in obeying the Lord? To obey is better than sacrifice, and to heed is better than the fat of rams" (1 Samuel 15:22, NIV).</span></p>
+                    
+                    <div class="key-quote">A revival may be expected when Christians have a spirit of prayer for a revival—that is, when they pray as if their hearts were set upon it. When they go about groaning out their heart's desire. When they have real travail of soul.<small>— Charles G. Finney</small></div>
+
+                    <p>The question before God's people today is this: What is the kind of prayer that God uses to set a church on fire with revival, and what does it cost to obtain it?</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2 id="section1">I. The Secret Place: Where Fire Is Kindled in Secret</h2>
+                    <p>Jesus taught His disciples, <span class="scripture-ref">"But when you pray, go into your room, close the door and pray to your Father, who is unseen. Then your Father, who sees what is done in secret, will reward you" (Matthew 6:6, NIV).</span></p>
+                    <p>The fire of revival does not fall on churches with the best programs or most talented leaders. It falls on churches whose people have learned the secret of prevailing prayer in hidden places.</p>
+                    <p>Fire always begins in hidden places before manifesting publicly. The secret place creates the public manifestation. Before the fire descends publicly, someone is burning secretly. Before multitudes are reached, an intercessor is in agony. Before harvest appears, someone sows with tears in hidden dependence.</p>
+                    <p>The psalmist declared, <span class="scripture-ref">"He who dwells in the shelter of the Most High will rest in the shadow of the Almighty. I will say of the Lord, 'He is my refuge and my fortress, my God, in whom I trust'" (Psalm 91:1-2, NIV).</span> This is the secret place—not a physical location, but a position of the heart.</p>
+                    
+                    <div class="highlight-box"><div class="highlight-box-title">Finney's Practice</div><p>"I was accustomed to use my voice in private prayer. For convenience sake, that I might not be heard, I had spread a buffalo robe on the hayloft, where I used to spend much of my time in secret prayer to God. I was in the habit of praying every Saturday night till after midnight for the descent of the Holy Ghost among them."</p></div>
+
+                    <p>When Finney was converted, it was in a grove where he went to pray. Very soon after his conversion, several other cases of conversion occurred that were reported to have taken place under similar circumstances—persons went up into the grove to pray, and there made their peace with God.</p>
+                    <p>The secret place is not reserved for preachers. It is available to every son and daughter of God. The mother praying for her children in the early morning hours. The student seeking God in their dorm room. The businessman who transforms his office into an altar. The father who intercedes for his family. Ordinary people willing to create space for the extraordinary.</p>
+                    <p>As Jesus promised, <span class="scripture-ref">"Ask and it will be given to you; seek and you will find; knock and the door will be opened to you. For everyone who asks receives; the one who seeks finds; and to the one who knocks, the door will be opened" (Matthew 7:7-8, NIV).</span></p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2 id="section2">II. The Spirit of True Prayer: More Than Words</h2>
+                    <p>What constitutes the spirit of prayer? Is it saying many prayers with warm words? Is it following some religious ritual or routine?</p>
+                    
+                    <div class="key-quote">Prevailing prayer is that which secures an answer. Saying prayers is not offering prevailing prayer. The prevalence of prayer does not depend so much on quantity as on quality. Effective prayer is prayer that attains what it seeks. It is prayer that moves God, effecting its end.<small>— Charles G. Finney</small></div>
+
+                    <p>The spirit of prayer, according to Finney, <span class="scripture-ref">"is a state of continual desire and anxiety of mind for the salvation of sinners. It is something that weighs down the heart of the believer. It is the subject of their thoughts all the time."</span></p>
+                    <p>This is not enthusiasm. It is exactly what the apostle Paul felt when he said, "My little children, of whom I travail in birth." This travail of soul is that deep agony which people feel when they lay hold on God for a blessing and will not let Him go until they receive it.</p>
+                    <p>James wrote, <span class="scripture-ref">"The prayer of a righteous person is powerful and effective. Elijah was a human being, even as we are. He prayed earnestly that it would not rain, and it did not rain on the land for three and a half years. Again he prayed, and the heavens gave rain, and the earth produced its crops" (James 5:16-18, NIV).</span></p>
+                    
+                    <div class="highlight-box"><div class="highlight-box-title">Finney's Testimony</div><p>"I have known persons pray till they were all wet with perspiration, in the coldest weather in winter. I have known persons pray for hours, till their strength was all exhausted with the agony of their minds. Such prayers prevailed with God."</p></div>
+
+                    <p>The apostle Paul understood this when he wrote, <span class="scripture-ref">"In the same way, the Spirit helps us in our weakness. We do not know what we ought to pray for, but the Spirit himself intercedes for us through wordless groans" (Romans 8:26, NIV).</span></p>
+                    <p>Jesus Himself taught us to pray with persistence: <span class="scripture-ref">"Suppose one of you has a friend, and he goes to him at midnight and says, 'Friend, lend me three loaves of bread, because a friend of mine on a journey has come to me, and I have nothing to set before him.' Then the one inside answers, 'Don't bother me. The door is already locked, and my children are with me in bed. I can't get up and give you anything.' I tell you, though he will not get up and give him the bread because he is his friend, yet because of the man's boldness he will get up and give him as much as he needs" (Luke 11:5-8, NIV).</span></p>
+                    <p>Prayer becomes powerful not through method but through surrender. When prayers cease to be negotiations and become worship. When the heart stops demanding and begins to yield.</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2 id="section3">III. The Price of Fire: Death to Self and Total Surrender</h2>
+                    <p>Here is the hinge upon which everything turns. Prayer becomes powerful when the vessel is emptied of self and broken sufficiently for God to fill completely.</p>
+                    
+                    <div class="key-quote">A willingness to deny self is the very spirit of Christ. It is the heart and soul of the Gospel. When you come back to God for pardon and salvation, come with all you have to lay all at His feet. Give up all that you are and all that you have to God, and take Him at His word. This is the only way to find peace and rest for your souls.<small>— Charles G. Finney</small></div>
+
+                    <p>The cost is everything. Your agenda, ambition, pride, reputation, comfort, security—everything you think you cannot live without. God does not share His throne. He wants complete control, not second place.</p>
+                    <p>Jesus said, <span class="scripture-ref">"Whoever wants to be my disciple must deny themselves and take up their cross daily and follow me. For whoever wants to save their life will lose it, but whoever loses their life for me will save it" (Luke 9:23-24, NIV).</span></p>
+                    <p>Paul captured this mystery when he wrote, <span class="scripture-ref">"I have been crucified with Christ and I no longer live, but Christ lives in me. The life I now live in the body, I live by faith in the Son of God, who loved me and gave himself for me" (Galatians 2:20, NIV).</span></p>
+                    <p>This is a daily crucifixion, constant death to self, absolute submission. The kingdom of heaven suffers violence, and the violent take it by force. As Finney explained, you must do violence to your own will, your own plans, your own ego until nothing remains but Christ.</p>
+                    <p>John the Baptist understood this when he declared, <span class="scripture-ref">"He must become greater; I must become less" (John 3:30, NIV).</span></p>
+                    <p>God cannot trust His power to vessels still full of themselves. Finney often spoke of his own need for brokenness and surrender. He wrote about being in a state of great dissatisfaction with his own want of stability in faith and love. He needed frequently to hold days of fasting and prayer, and to spend much time in overhauling his own religious life, in order to retain that communion with God.</p>
+                    
+                    <div class="highlight-box"><div class="highlight-box-title">The Key</div><p>God does not anoint abilities—He anoints brokenness. He does not use talent—He uses surrender. He does not seek strength—He seeks recognized weakness so His power can be manifested.</p></div>
+
+                    <p>Paul understood this when he wrote, <span class="scripture-ref">"But he said to me, 'My grace is sufficient for you, for my power is made perfect in weakness.' Therefore I will boast all the more gladly about my weaknesses, so that Christ's power may rest on me. That is why, for Christ's sake, I delight in weaknesses, in insults, in hardships, in persecutions, in difficulties. For when I am weak, then I am strong" (2 Corinthians 12:9-10, NIV).</span></p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2 id="section4">IV. The Upper Room Pattern: Waiting Until Fire Falls</h2>
+                    <p>The apostles had walked with Jesus, witnessed miracles and resurrection. Yet they still lacked power—they had to wait in the upper room. The Scripture records, <span class="scripture-ref">"They all joined together constantly in prayer, along with the women and Mary the mother of Jesus, and with his brothers" (Acts 1:14, NIV).</span></p>
+                    <p>They remained in prayer, unity, and complete dependence until fire descended. <span class="scripture-ref">When the day of Pentecost came, they were all together in one place. Suddenly a sound like the blowing of a violent wind came from heaven and filled the whole house where they were sitting. They saw what seemed to be tongues of fire that separated and came to rest on each of them. All of them were filled with the Holy Spirit (Acts 2:1-4, NIV).</span></p>
+                    <p>That fire did not illuminate just one room—it set an entire city ablaze. And from that city, the fire spread to other cities, other nations, until the entire world was reached.</p>
+                    <p>The apostles transformed the world not through eloquence or program, but through days of hidden prayer in the upper room until they became empty vessels the Holy Spirit could fill.</p>
+                    <p>Peter, who had denied Jesus three times, stood up on the day of Pentecost and proclaimed, <span class="scripture-ref">"Repent and be baptized, every one of you, in the name of Jesus Christ for the forgiveness of your sins. And you will receive the gift of the Holy Spirit. The promise is for you and your children and for all who are far off—for all whom the Lord our God will call" (Acts 2:38-39, NIV).</span> That day, about three thousand were added to their number. This is the power that comes from waiting in the secret place until fire falls.</p>
+                    <p>Many want the mantle without the brokenness, want the authority without the humiliation, want to operate in power without going through the process. But God does not work that way.</p>
+                    <p>Everyone wants the glory of Pentecost, but few want to wait ten days in the upper room. And because of this, we have churches full of activity but empty of power. We have services full of noise but empty of presence.</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2 id="section-revival">V. What Is Revival? Understanding What We Seek</h2>
+                    
+                    <div class="key-quote">It's called revival because something that already had life has grown weak, asleep, or near death—and it needs to be brought back to life again.<small>— Pastor Mits Filion</small></div>
+                    
+                    <p>You don't revive what was never alive. In the Bible, revival is not about converting sinners—that's evangelism. Revival is about awakening God's people.</p>
+                    
+                    <p><span class="scripture-ref">"Revive us again, that Your people may rejoice in You" (Psalm 85:6, NIV).</span></p>
+                    
+                    <p>Israel already belonged to God—but their hearts drifted. The church already knows truth—but the fire fades. Revival is heaven breathing life back into a people who still believe, but no longer burn.</p>
+                    
+                    <p>That's why revival always starts inside, not outside.</p>
+                    
+                    <div class="highlight-box">
+                        <div class="highlight-box-title">It's Called Revival Because</div>
+                        <ul>
+                            <li>Prayer is still happening—but without tears</li>
+                            <li>Worship is still happening—but without awe</li>
+                            <li>Preaching is still happening—but without conviction</li>
+                            <li>People are still saved—but holiness is missing</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <div class="highlight-box-title">Revival Is God Restoring</div>
+                        <ul>
+                            <li>First love</li>
+                            <li>Fear of the Lord</li>
+                            <li>Power of the Holy Spirit</li>
+                            <li>Obedience, not just knowledge</li>
+                        </ul>
+                    </div>
+                    
+                    <p>Charles Finney said revival is not a miracle—it's the right use of the appointed means. In other words, when God's people repent, return, and realign, life rushes back in.</p>
+                    
+                    <div class="key-quote">Revival is not new fire—it's old fire burning again. Not new truth—but truth obeyed. Not louder services—but cleaner hearts.</div>
+                    
+                    <p>That's why it's called revival—because God is reviving what belongs to Him.</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2 id="section5">VI. The Man of Prayer: Father Nash</h2>
+                    <p>Finney knew a man named Father Nash who was most wonderful in prayer—one of the most earnest, devout, spiritually-minded, heavenly-minded men Finney ever saw. He gave himself up to almost constant prayer, literally praying himself to death at last.</p>
+                    <p>He had a praying list of persons whom he made subjects of prayer every day, and sometimes many times a day. When Finney got to town to start a revival, a boarding house lady said, "Brother Finney, do you know a Father Nash? He and two other men have been at my boarding house for the last three days, but they haven't eaten a bite of food. I opened the door and peeped in at them because I could hear them groaning, and I saw them down on their faces."</p>
+                    <p>When the public meetings started, Father Nash would not usually attend but kept praying in his closet for the convicting power of the Holy Spirit to fall on the crowd and melt their hearts. When opposition arose, Father Nash would pray all the harder.</p>
+                    <p>This is the kind of hidden intercession that prepares the way for revival. Not public performance, but secret agony. Not platform presence, but closet persistence.</p>
+                    <p>The apostle Paul instructed the church: <span class="scripture-ref">"And pray in the Spirit on all occasions with all kinds of prayers and requests. With this in mind, be alert and always keep on praying for all the Lord's people" (Ephesians 6:18, NIV).</span></p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2 id="section6">VII. The Call to Decision: Will You Pay the Price?</h2>
+                    <p>This may be your hour—God has orchestrated circumstances, timing, everything—so you would hear this message now. Do not let it pass.</p>
+                    
+                    <div class="key-quote">Will you do it? Have you gone over with your sins and confessed them and gotten them all out of the way? Can you pray now? Will you join and offer prevailing prayer that the Spirit of God may come down here?<small>— Charles G. Finney</small></div>
+
+                    <p>The prophet Isaiah issued a similar call: <span class="scripture-ref">"Seek the Lord while he may be found; call on him while he is near. Let the wicked forsake their ways and the unrighteous their thoughts. Let them turn to the Lord, and he will have mercy on them, and to our God, for he will freely pardon" (Isaiah 55:6-7, NIV).</span></p>
+                    <p>Stop playing at Christianity. Stop pretending everything is fine when you know it is not. Stop settling for crumbs when God offers His presence. Stop living on the periphery when God is calling you to the center of His will.</p>
+                    <p>Stop trying to live for God and simply allow God to live through you.</p>
+                    <p>Do not wait for better conditions—surrender is a present, immediate yielding. The fire spreads when one person burns completely for God. Be that one person who pays the price others refuse to pay.</p>
+                    
+                    <div class="highlight-box"><div class="highlight-box-title">Finney's Warning</div><p>"Unless you have the spirit of prayer, you can do nothing. You may preach, you may talk, you may distribute literature, you may do many things, but without prayer, without the Spirit of God, you will do nothing for the salvation of souls."</p></div>
+
+                    <p>The author of Hebrews exhorts us: <span class="scripture-ref">"Let us then approach God's throne of grace with confidence, so that we may receive mercy and find grace to help us in our time of need" (Hebrews 4:16, NIV).</span></p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2 id="conclusion">Conclusion: It Always Begins With One</h2>
+                    <p>It begins with one surrendered life—one person willing to enter the process of brokenness and total surrender.</p>
+                    <p>Noah alone preaching righteousness for 120 years. Abraham alone leaving everything to follow God's call. Elijah alone confronting Baal on Mount Carmel. John the Baptist alone crying in the wilderness. Jesus alone carrying the cross. The apostles few in number waiting in the upper room.</p>
+                    <p>It always begins with one.</p>
+                    <p>Without total surrender, you can preach, sing, serve—but produce no eternal fruit. With total surrender, dormant resurrection power awakens within you. What begins as one burning life spreads to families, communities, churches, cities.</p>
+                    
+                    <div class="key-quote">The fire of revival does not fall on churches with the best programs or most talented leaders. It falls on churches whose people have learned the secret of total surrender and prevailing prayer.</div>
+
+                    <p>Paul wrote to the Philippians: <span class="scripture-ref">"Continue to work out your salvation with fear and trembling, for it is God who works in you to will and to act in order to fulfill his good purpose" (Philippians 2:12-13, NIV).</span></p>
+                    <p>If you would have this spirit of prayer, you must give yourselves to prayer. You must make time for prayer. You must pray in your families. You must pray in secret. You must pray much. You must pray earnestly. You must pray in faith. You must pray with perseverance.</p>
+                    
+                    <p style="text-align:center; font-style:italic; margin-top:2rem;">May God help us to be a praying people, and to seek His face until He comes and rains righteousness upon us.</p>
+                    
+                    <div class="highlight-box"><div class="highlight-box-title">Altar Call Prayer</div><p>"Here I am—take everything—break me, empty me, ignite in me a fire that will never go out."</p></div>
+
+                    <p style="text-align:center; font-weight:600; margin-top:2rem;">What differentiates ordinary Christianity from life that sets multitudes ablaze is not gift, talent, education, or opportunity. It is total surrender—a life hidden with Christ in God, completely yielded to His will and His glory.</p>
+
+                    <p style="text-align:center; font-family:var(--font-serif); font-size:1.25rem; margin-top:2rem;"><em>Amen.</em></p>
+                    <!-- SERMON TEXT END -->
+                </div>
+            </section>
+            
+            <!-- OUTLINE SECTION -->
+            <section id="outline-section" class="content-section">
+                <div class="editable-content" id="outlineContent" data-storage-key="finney-outline-content-v3">
+                    <!-- OUTLINE TEXT START -->
+                    <header>
+                        <h1 class="main-title">Sermon Outline</h1>
+                        <p class="subtitle">The Secret Life That Sets the Whole Church on Fire</p>
+                        <div class="sermon-meta">
+                            <p><strong>Main Text:</strong> Matthew 6:6 (NIV)</p>
+                            <p><strong>Big Idea:</strong> When believers cultivate a hidden life of surrendered, prevailing prayer in the secret place, the Holy Spirit ignites them with a fire that sets entire churches—and communities—ablaze for the Kingdom of God.</p>
+                        </div>
+                    </header>
+
+                    <h2>Introduction: The Crisis of Powerless Christianity</h2>
+                    <div class="key-concept">Central Question: Why are churches full of activity yet empty of power?</div>
+                    <div class="outline-point"><strong>Key Points:</strong><div class="outline-subpoint">The secret that transforms ordinary people into spiritual giants has been buried under religious programs and lukewarm Christianity</div><div class="outline-subpoint">God is not looking for extraordinary talents—He is looking for completely surrendered hearts</div></div>
+                    <div class="outline-point"><strong>Scripture:</strong> 1 Samuel 15:22 (NIV)<div class="outline-subpoint">"To obey is better than sacrifice, and to heed is better than the fat of rams."</div></div>
+                    <div class="key-quote">"A revival may be expected when Christians have a spirit of prayer for a revival—that is, when they pray as if their hearts were set upon it."<small>— Charles G. Finney</small></div>
+                    <p class="preacher-note">Pause for reflection</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2>I. The Secret Place: Where Fire Is Kindled in Secret</h2>
+                    <div class="key-concept">Point Sentence: Fire always begins in hidden places before manifesting publicly.</div>
+                    <div class="outline-point"><strong>Scripture:</strong> Matthew 6:6; 7:7-8 (NIV)<div class="outline-subpoint">"But when you pray, go into your room, close the door and pray to your Father..."</div><div class="outline-subpoint">"Ask and it will be given to you; seek and you will find; knock and the door will be opened..."</div></div>
+                    <div class="outline-point"><strong>Supporting Scripture:</strong> Psalm 91:1-2 (NIV)<div class="outline-subpoint">"He who dwells in the shelter of the Most High will rest in the shadow of the Almighty."</div></div>
+                    <div class="outline-point"><strong>Key Finney Concepts:</strong><div class="outline-subpoint">Finney prayed on a buffalo robe in the hayloft</div><div class="outline-subpoint">He prayed every Saturday night till after midnight for the descent of the Holy Ghost</div><div class="outline-subpoint">His own conversion happened in a grove where he went to pray</div></div>
+                    <div class="outline-point"><strong>Application Hooks:</strong><div class="outline-subpoint">Parents: Your early morning prayer closet vs. rushing into the day</div><div class="outline-subpoint">Youth: Your room as an altar vs. secret scrolling</div><div class="outline-subpoint">Everyone: Create your "upper room"—a specific place and time for secret prayer</div></div>
+                    <p class="preacher-note">Look at congregation with warmth</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2>II. The Spirit of True Prayer: More Than Words</h2>
+                    <div class="key-concept">Point Sentence: Prevailing prayer is that which secures an answer—not merely saying prayers.</div>
+                    <div class="outline-point"><strong>Scripture:</strong> Romans 8:26; James 5:16-18; Luke 11:5-8 (NIV)<div class="outline-subpoint">"The Spirit helps us in our weakness... the Spirit himself intercedes for us through wordless groans."</div><div class="outline-subpoint">"The prayer of a righteous person is powerful and effective."</div><div class="outline-subpoint">"Because of the man's boldness he will get up and give him as much as he needs."</div></div>
+                    <div class="outline-point"><strong>Key Finney Quotes to Weave In:</strong><div class="outline-subpoint">"Saying prayers is not offering prevailing prayer"</div><div class="outline-subpoint">"The prevalence of prayer does not depend so much on quantity as on quality"</div><div class="outline-subpoint">"The spirit of prayer is a state of continual desire and anxiety of mind for the salvation of sinners"</div></div>
+                    <div class="highlight-box"><div class="highlight-box-title">Finney Testimony</div><p>"I have known persons pray till they were all wet with perspiration, in the coldest weather in winter... till their strength was all exhausted with the agony of their minds. Such prayers prevailed with God."</p></div>
+                    <div class="outline-point"><strong>Application Hooks:</strong><div class="outline-subpoint">Prayer becomes powerful through surrender, not technique</div><div class="outline-subpoint">When prayers cease to be negotiations and become worship</div></div>
+                    <p class="preacher-note">Invite worship team to play softly about God's fire</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2>III. The Price of Fire: Death to Self and Total Surrender</h2>
+                    <div class="key-concept">Point Sentence: Prayer becomes powerful when the vessel is emptied of self and broken sufficiently for God to fill completely.</div>
+                    <div class="outline-point"><strong>Scripture:</strong> Galatians 2:20; Luke 9:23-24; John 3:30; 2 Corinthians 12:9-10 (NIV)<div class="outline-subpoint">"I have been crucified with Christ and I no longer live, but Christ lives in me."</div><div class="outline-subpoint">"Whoever wants to be my disciple must deny themselves and take up their cross daily..."</div><div class="outline-subpoint">"He must become greater; I must become less."</div><div class="outline-subpoint">"My power is made perfect in weakness... For when I am weak, then I am strong."</div></div>
+                    <div class="outline-point"><strong>Key Finney Quotes:</strong><div class="outline-subpoint">"A willingness to deny self is the very spirit of Christ. It is the heart and soul of the Gospel."</div><div class="outline-subpoint">"Give up all that you are and all that you have to God, and take Him at His word."</div><div class="outline-subpoint">"You must do violence to your own will, your own plans, your own ego until nothing remains but Christ."</div></div>
+                    <div class="outline-point"><strong>The Cost Is Everything:</strong><div class="outline-subpoint">Agenda, ambition, pride, reputation, comfort, security</div><div class="outline-subpoint">God does not share His throne—He wants complete control</div></div>
+                    <div class="key-concept">Key Concept: God does not anoint abilities—He anoints brokenness. He does not use talent—He uses surrender.</div>
+                    <div class="outline-point"><strong>Application Hooks:</strong><div class="outline-subpoint">Cry out for brokenness: "Lord, break me, empty me, consume me"</div><div class="outline-subpoint">Face your "Ishmaels"—every attempt to do God's work in your own strength</div><div class="outline-subpoint">Let the Holy Spirit perfect His power in your recognized weakness</div></div>
+                    <p class="preacher-note">Pause here—let the weight land</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2>IV. The Upper Room Pattern: Waiting Until Fire Falls</h2>
+                    <div class="key-concept">Point Sentence: The apostles transformed the world not through eloquence but through days of hidden prayer until they became empty vessels.</div>
+                    <div class="outline-point"><strong>Scripture:</strong> Acts 1:14; 2:1-4; 2:38-39 (NIV)<div class="outline-subpoint">"They all joined together constantly in prayer..."</div><div class="outline-subpoint">"All of them were filled with the Holy Spirit..."</div><div class="outline-subpoint">"Repent and be baptized... about three thousand were added to their number."</div></div>
+                    <div class="outline-point"><strong>Key Concepts:</strong><div class="outline-subpoint">The apostles walked with Jesus, witnessed miracles—yet still lacked power</div><div class="outline-subpoint">They had to wait in the upper room in prayer, unity, and complete dependence</div><div class="outline-subpoint">The fire that fell set an entire city ablaze, then spread to the world</div></div>
+                    <div class="highlight-box"><div class="highlight-box-title">The Modern Tension</div><p>Everyone wants the glory of Pentecost, but few want to wait ten days in the upper room. We have churches full of activity but empty of power.</p></div>
+                    <div class="outline-point"><strong>Application Hooks:</strong><div class="outline-subpoint">Many want the mantle without the brokenness</div><div class="outline-subpoint">Many want authority without the humiliation</div><div class="outline-subpoint">Be willing to wait in prayer until something dies in you</div></div>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2>V. What Is Revival? Understanding What We Seek</h2>
+                    <div class="key-concept">Point Sentence: Revival is not evangelism—it is God reviving what already belongs to Him.</div>
+                    <div class="outline-point"><strong>Core Definition:</strong><div class="outline-subpoint">"It's called revival because something that already had life has grown weak, asleep, or near death—and it needs to be brought back to life again."</div><div class="outline-subpoint">"You don't revive what was never alive."</div></div>
+                    <div class="outline-point"><strong>Revival vs. Evangelism:</strong><div class="outline-subpoint">In the Bible, revival is not about converting sinners (that's evangelism)</div><div class="outline-subpoint">Revival is about awakening God's people</div><div class="outline-subpoint">Israel already belonged to God—but their hearts drifted</div><div class="outline-subpoint">The church already knows truth—but the fire fades</div></div>
+                    <div class="outline-point"><strong>Scripture:</strong> Psalm 85:6 (NIV)<div class="outline-subpoint">"Revive us again, that Your people may rejoice in You."</div></div>
+                    <div class="highlight-box">
+                        <div class="highlight-box-title">It's Called Revival Because</div>
+                        <ul>
+                            <li>Prayer is still happening—but without tears</li>
+                            <li>Worship is still happening—but without awe</li>
+                            <li>Preaching is still happening—but without conviction</li>
+                            <li>People are still saved—but holiness is missing</li>
+                        </ul>
+                    </div>
+                    <div class="outline-point"><strong>Revival Is God Restoring:</strong><div class="outline-subpoint">First love</div><div class="outline-subpoint">Fear of the Lord</div><div class="outline-subpoint">Power of the Holy Spirit</div><div class="outline-subpoint">Obedience, not just knowledge</div></div>
+                    <div class="outline-point"><strong>Finney on Revival:</strong><div class="outline-subpoint">"Charles Finney said revival is not a miracle—it's the right use of the appointed means."</div><div class="outline-subpoint">"In other words, when God's people repent, return, and realign, life rushes back in."</div></div>
+                    <div class="key-quote">"Revival is not new fire—it's old fire burning again. Not new truth—but truth obeyed. Not louder services—but cleaner hearts."</div>
+                    <div class="outline-point"><strong>Key Truth:</strong><div class="outline-subpoint">"That's why it's called revival—because God is reviving what belongs to Him."</div></div>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2>VI. The Man of Prayer: Father Nash</h2>
+                    <div class="key-concept">Point Sentence: Hidden intercession prepares the way for public revival.</div>
+                    <div class="outline-point"><strong>Scripture:</strong> Ephesians 6:18 (NIV)<div class="outline-subpoint">"Pray in the Spirit on all occasions with all kinds of prayers and requests... always keep on praying for all the Lord's people."</div></div>
+                    <div class="outline-point"><strong>The Finney-Nash Story:</strong><div class="outline-subpoint">Father Nash gave himself up to almost constant prayer</div><div class="outline-subpoint">He had a daily praying list of people he interceded for</div><div class="outline-subpoint">He literally prayed himself to death</div><div class="outline-subpoint">When Finney arrived for a revival, Nash had been fasting and praying for three days—found on his face, groaning before God</div><div class="outline-subpoint">During public meetings, Nash stayed in his closet praying for the convicting power of the Holy Spirit to fall</div></div>
+                    <div class="key-concept">Key Insight: Not public performance, but secret agony. Not platform presence, but closet persistence.</div>
+                    <div class="outline-point"><strong>Application Hooks:</strong><div class="outline-subpoint">Who is on your daily praying list?</div><div class="outline-subpoint">Are you willing to pray in secret what you cannot preach in public?</div><div class="outline-subpoint">The hidden intercessor is the unsung hero of every revival</div></div>
+                    <p class="preacher-note">Look at youth with encouragement</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2>VII. The Call to Decision: Will You Pay the Price?</h2>
+                    <div class="key-concept">Point Sentence: This may be your hour—God has orchestrated everything so you would hear this message now.</div>
+                    <div class="outline-point"><strong>Scripture:</strong> Isaiah 55:6-7; Hebrews 4:16 (NIV)<div class="outline-subpoint">"Seek the Lord while he may be found; call on him while he is near..."</div><div class="outline-subpoint">"Let us then approach God's throne of grace with confidence..."</div></div>
+                    <div class="outline-point"><strong>Finney's Direct Questions:</strong><div class="outline-subpoint">"Will you do it?"</div><div class="outline-subpoint">"Have you gone over with your sins and confessed them?"</div><div class="outline-subpoint">"Can you pray now?"</div><div class="outline-subpoint">"Will you join and offer prevailing prayer that the Spirit of God may come down here?"</div></div>
+                    <div class="outline-point"><strong>The Three Stops:</strong><div class="outline-subpoint">Stop playing at Christianity</div><div class="outline-subpoint">Stop settling for crumbs when God offers His presence</div><div class="outline-subpoint">Stop trying to live for God and allow God to live through you</div></div>
+                    <div class="highlight-box"><div class="highlight-box-title">Finney's Warning</div><p>"Unless you have the spirit of prayer, you can do nothing. You may preach, you may talk, you may distribute literature... but without prayer, without the Spirit of God, you will do nothing for the salvation of souls."</p></div>
+                    <div class="outline-point"><strong>Application Hooks:</strong><div class="outline-subpoint">Don't wait for better conditions—surrender is a present, immediate yielding</div><div class="outline-subpoint">The fire spreads when one person burns completely for God</div><div class="outline-subpoint">Be that one person who pays the price others refuse to pay</div></div>
+                    <p class="preacher-note">Transition to altar call</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2>Conclusion: It Always Begins With One</h2>
+                    <div class="key-concept">Point Sentence: What begins as one burning life spreads to families, communities, churches, and cities.</div>
+                    <div class="outline-point"><strong>Scripture:</strong> Philippians 2:12-13 (NIV)<div class="outline-subpoint">"Continue to work out your salvation with fear and trembling, for it is God who works in you to will and to act..."</div></div>
+                    <div class="outline-point"><strong>The Pattern Through History:</strong><div class="outline-subpoint">Noah alone preaching righteousness for 120 years</div><div class="outline-subpoint">Abraham alone leaving everything to follow God's call</div><div class="outline-subpoint">Elijah alone confronting Baal on Mount Carmel</div><div class="outline-subpoint">Jesus alone carrying the cross</div><div class="outline-subpoint">The apostles few in number waiting in the upper room</div></div>
+                    <div class="outline-point"><strong>The Two Paths:</strong><div class="outline-subpoint">Without total surrender: You can preach, sing, serve—but produce no eternal fruit</div><div class="outline-subpoint">With total surrender: Dormant resurrection power awakens within you</div></div>
+                    <div class="key-quote">"If you would have this spirit of prayer, you must give yourselves to prayer. You must make time for prayer. You must pray in your families. You must pray in secret. You must pray much. You must pray earnestly. You must pray in faith. You must pray with perseverance."<small>— Charles G. Finney</small></div>
+                    <div class="outline-point"><strong>Closing Invitation:</strong><div class="outline-subpoint">"May God help us to be a praying people, and to seek His face until He comes and rains righteousness upon us."</div></div>
+                    <div class="highlight-box"><div class="highlight-box-title">Altar Call Prayer</div><p>"Here I am—take everything—break me, empty me, ignite in me a fire that will never go out."</p></div>
+                    <p class="preacher-note">Invite worship team to lead song about surrender/refiner's fire</p>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <h2>Post-Sermon Application Points</h2>
+                    <h3>For Believers</h3>
+                    <div class="outline-point">
+                        <div class="outline-subpoint">Create your "upper room"—a specific place and time for secret prayer daily</div>
+                        <div class="outline-subpoint">Develop a praying list of people to intercede for regularly</div>
+                        <div class="outline-subpoint">Cry out for brokenness: "Lord, break me, empty me, consume me"</div>
+                        <div class="outline-subpoint">Face your "Ishmaels"—every attempt to do God's work in your own strength</div>
+                        <div class="outline-subpoint">Join with others for corporate prayer focused on revival</div>
+                    </div>
+                    <h3>For Those Who Do Not Yet Know Christ</h3>
+                    <div class="outline-point">
+                        <div class="outline-subpoint">Come to Him today—don't wait for perfect conditions</div>
+                        <div class="outline-subpoint">Lay down your life at His feet completely</div>
+                        <div class="outline-subpoint">Give up all you are and have to God without reservation</div>
+                        <div class="outline-subpoint">Take Him at His word—this is the only way to true peace</div>
+                    </div>
+                    <h3>For All of Us</h3>
+                    <div class="outline-point">
+                        <div class="outline-subpoint">Make the decision of total surrender right now, today</div>
+                        <div class="outline-subpoint">Recognize you are at the breaking point—tired of lifeless religion</div>
+                        <div class="outline-subpoint">Stop negotiating with God and simply say "yes" without conditions</div>
+                        <div class="outline-subpoint">Ask God to give us the spirit of prayer</div>
+                        <div class="outline-subpoint">Ask Him to break our hearts for the lost</div>
+                        <div class="outline-subpoint">Ask Him to make us willing to pay the price of revival</div>
+                    </div>
+
+                    <div class="section-divider">&#x2022; &#x2022; &#x2022;</div>
+
+                    <div class="key-quote">What differentiates ordinary Christianity from life that sets multitudes ablaze is not gift, talent, education, or opportunity. It's total surrender—a life hidden with Christ in God, completely yielded to His will and His glory.</div>
+
+                    <p style="text-align:center; font-family:var(--font-serif); font-size:1.25rem; margin-top:2rem;"><em>Amen.</em></p>
+                    <!-- OUTLINE TEXT END -->
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // State management
+        let isEditing = false;
+        let isSidebarOpen = false;
+        const STORAGE_KEYS = {
+            sermon: 'finney-sermon-content-v3',
+            outline: 'finney-outline-content-v3',
+            checkpoint: 'finney-checkpoint-v3'
+        };
+        
+        // Section IDs for scroll spy
+        const sectionIds = ['intro', 'section1', 'section2', 'section3', 'section4', 'section-revival', 'section5', 'section6', 'conclusion'];
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedContent();
+            setupAutoSave();
+            saveCheckpoint();
+            setupScrollSpy();
+            
+            // Check if mobile and close sidebar by default
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        });
+        
+        // Toggle Sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('navSidebar');
+            const contentArea = document.getElementById('contentArea');
+            const toggle = document.getElementById('sidebarToggle');
+            
+            isSidebarOpen = !isSidebarOpen;
+            
+            if (isSidebarOpen) {
+                sidebar.classList.add('open');
+                contentArea.classList.add('sidebar-open');
+                toggle.style.left = '260px';
+            } else {
+                closeSidebar();
+            }
+        }
+        
+        function closeSidebar() {
+            const sidebar = document.getElementById('navSidebar');
+            const contentArea = document.getElementById('contentArea');
+            const toggle = document.getElementById('sidebarToggle');
+            
+            sidebar.classList.remove('open');
+            contentArea.classList.remove('sidebar-open');
+            toggle.style.left = '0';
+            isSidebarOpen = false;
+        }
+        
+        // Show Section (Sermon or Outline)
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            
+            // Show target section
+            document.getElementById(sectionName + '-section').classList.add('active');
+            
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById('nav-' + sectionName).classList.add('active');
+            
+            // Show/hide sermon nav links based on current view
+            const sermonNavLinks = document.getElementById('sermonNavLinks');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            
+            if (sectionName === 'sermon') {
+                sermonNavLinks.style.display = 'block';
+                sidebarToggle.classList.remove('hidden');
+            } else {
+                sermonNavLinks.style.display = 'none';
+                sidebarToggle.classList.add('hidden');
+                closeSidebar();
+            }
+            
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        
+        // Scroll to Section with offset for toolbar
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                const toolbarHeight = document.querySelector('.toolbar').offsetHeight;
+                const bannerHeight = document.querySelector('.edit-mode-banner').offsetHeight || 0;
+                const offset = toolbarHeight + bannerHeight + 16;
+                
+                const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Close sidebar on mobile after navigation
+                if (window.innerWidth <= 768) {
+                    closeSidebar();
+                }
+            }
+        }
+        
+        // Scroll Spy - Active Section Highlighting
+        function setupScrollSpy() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '-80px 0px -60% 0px',
+                threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        updateActiveNavLink(id);
+                    }
+                });
+            }, observerOptions);
+            
+            sectionIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) observer.observe(el);
+            });
+        }
+        
+        function updateActiveNavLink(activeId) {
+            document.querySelectorAll('#sermonNavLinks .nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.section === activeId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Edit Mode Functions
+        function toggleEditMode() {
+            if (isEditing) {
+                exitEditMode();
+            } else {
+                document.getElementById('editModal').classList.add('active');
+            }
+        }
+        
+        function confirmEditMode() {
+            document.getElementById('editModal').classList.remove('active');
+            enterEditMode();
+        }
+        
+        function cancelEditMode() {
+            document.getElementById('editModal').classList.remove('active');
+        }
+        
+        function enterEditMode() {
+            isEditing = true;
+            document.body.classList.add('editing');
+            
+            const btn = document.getElementById('editBtn');
+            btn.classList.add('editing');
+            document.getElementById('editBtnText').textContent = 'Done';
+            
+            document.querySelectorAll('.editable-content').forEach(el => {
+                el.contentEditable = 'true';
+            });
+            
+            saveCheckpoint();
+        }
+        
+        function exitEditMode() {
+            isEditing = false;
+            document.body.classList.remove('editing');
+            
+            const btn = document.getElementById('editBtn');
+            btn.classList.remove('editing');
+            document.getElementById('editBtnText').textContent = 'Edit';
+            
+            document.querySelectorAll('.editable-content').forEach(el => {
+                el.contentEditable = 'false';
+            });
+            
+            saveAllContent();
+        }
+        
+        // Auto Save
+        let saveTimeout;
+        function setupAutoSave() {
+            document.querySelectorAll('.editable-content').forEach(el => {
+                el.addEventListener('input', function() {
+                    clearTimeout(saveTimeout);
+                    saveTimeout = setTimeout(() => saveContent(this), 1000);
+                });
+            });
+        }
+        
+        function saveContent(el) {
+            const key = el.getAttribute('data-storage-key');
+            localStorage.setItem(key, el.innerHTML);
+        }
+        
+        function saveAllContent() {
+            document.querySelectorAll('.editable-content').forEach(el => saveContent(el));
+        }
+        
+        // Checkpoint System
+        function saveCheckpoint() {
+            const checkpoint = {
+                sermon: document.getElementById('sermonContent').innerHTML,
+                outline: document.getElementById('outlineContent').innerHTML,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem(STORAGE_KEYS.checkpoint, JSON.stringify(checkpoint));
+        }
+        
+        function loadSavedContent() {
+            const savedSermon = localStorage.getItem(STORAGE_KEYS.sermon);
+            if (savedSermon) {
+                document.getElementById('sermonContent').innerHTML = savedSermon;
+            }
+            
+            const savedOutline = localStorage.getItem(STORAGE_KEYS.outline);
+            if (savedOutline) {
+                document.getElementById('outlineContent').innerHTML = savedOutline;
+            }
+        }
+        
+        // Revert Functions
+        function revertChanges() {
+            const checkpoint = localStorage.getItem(STORAGE_KEYS.checkpoint);
+            if (checkpoint) {
+                document.getElementById('revertModal').classList.add('active');
+            } else {
+                alert('No checkpoint found. Make some edits first to create a checkpoint.');
+            }
+        }
+        
+        function confirmRevert() {
+            const checkpoint = localStorage.getItem(STORAGE_KEYS.checkpoint);
+            if (checkpoint) {
+                const data = JSON.parse(checkpoint);
+                document.getElementById('sermonContent').innerHTML = data.sermon;
+                document.getElementById('outlineContent').innerHTML = data.outline;
+                saveAllContent();
+            }
+            document.getElementById('revertModal').classList.remove('active');
+        }
+        
+        function cancelRevert() {
+            document.getElementById('revertModal').classList.remove('active');
+        }
+        
+        // Print Functions
+        function printSermon() {
+            document.body.classList.add('print-sermon');
+            document.body.classList.remove('print-outline');
+            
+            const sermonSection = document.getElementById('sermon-section');
+            const outlineSection = document.getElementById('outline-section');
+            
+            sermonSection.style.display = 'block';
+            outlineSection.style.display = 'none';
+            
+            window.print();
+            
+            setTimeout(() => {
+                document.body.classList.remove('print-sermon');
+                showSection('sermon');
+            }, 100);
+        }
+        
+        function printOutline() {
+            document.body.classList.add('print-outline');
+            document.body.classList.remove('print-sermon');
+            
+            const sermonSection = document.getElementById('sermon-section');
+            const outlineSection = document.getElementById('outline-section');
+            
+            outlineSection.style.display = 'block';
+            sermonSection.style.display = 'none';
+            
+            window.print();
+            
+            setTimeout(() => {
+                document.body.classList.remove('print-outline');
+                showSection('outline');
+            }, 100);
+        }
+        
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isEditing) {
+                exitEditMode();
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && !isSidebarOpen) {
+                // Optional: auto-open sidebar on large screens
+            }
+        });
+        
+        // Margin Control Functions
+        let currentMargin = 1.5; // Default margin in rem
+        const MIN_MARGIN = 0.25; // Minimum margin (very narrow)
+        const MAX_MARGIN = 6;    // Maximum margin (very wide)
+        const MARGIN_STEP = 0.25; // Step size for each click
+        
+        function updateMargin() {
+            // Clamp the margin value
+            currentMargin = Math.max(MIN_MARGIN, Math.min(MAX_MARGIN, currentMargin));
+            
+            // Apply to content area
+            document.querySelectorAll('.content-area').forEach(el => {
+                el.style.setProperty('--content-margin', currentMargin + 'rem');
+            });
+            
+            // Save preference
+            localStorage.setItem('finney-margin-preference', currentMargin);
+        }
+        
+        function increaseMargin() {
+            currentMargin += MARGIN_STEP;
+            updateMargin();
+        }
+        
+        function decreaseMargin() {
+            currentMargin -= MARGIN_STEP;
+            updateMargin();
+        }
+        
+        // Load saved margin preference on init
+        function loadMarginPreference() {
+            const savedMargin = localStorage.getItem('finney-margin-preference');
+            if (savedMargin !== null) {
+                currentMargin = parseFloat(savedMargin);
+                updateMargin();
+            }
+        }
+        
+        // Call on load
+        loadMarginPreference();
+    </script>
+</body>
+</html>
